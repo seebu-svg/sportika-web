@@ -7,14 +7,12 @@
 
 <header
     x-data="{ open: false, aboutOpen: false, playersOpen: false }"
-    class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm"
+    class="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-md shadow-sm"
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-            <span class="grid size-9 place-items-center rounded-lg bg-blue-600 font-display text-xl text-white">
-                S
-            </span>
-            <span class="font-display text-2xl tracking-widest text-pitch-950">
+            <img src="{{ asset('images/wolf-logo.png') }}" alt="{{ $navSettings->site_name }}" class="size-10 rounded-lg object-contain">
+            <span class="font-display text-2xl tracking-widest text-black">
                 {{ strtoupper($navSettings->site_name) }}
             </span>
         </a>
@@ -27,8 +25,8 @@
                     x-on:click="aboutOpen = ! aboutOpen"
                     @class([
                         'flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition',
-                        'bg-blue-50 text-blue-700' => $isAboutActive,
-                        'text-slate-500 hover:text-pitch-950' => ! $isAboutActive,
+                        'bg-blue-50/80 text-accent-500' => $isAboutActive,
+                        'text-gray-500 hover:text-black' => ! $isAboutActive,
                     ])
                 >
                     About Us
@@ -45,10 +43,10 @@
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-1"
                     x-cloak
-                    class="absolute left-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
+                    class="absolute left-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg shadow-gray-200/50"
                 >
-                    <a href="{{ route('about') }}" class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">Our Story</a>
-                    <a href="{{ route('team') }}" class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">Our Team</a>
+                    <a href="{{ route('about') }}" class="block px-4 py-2.5 text-sm text-gray-600 transition hover:bg-blue-50/50 hover:text-accent-500">Our Story</a>
+                    <a href="{{ route('team') }}" class="block px-4 py-2.5 text-sm text-gray-600 transition hover:bg-blue-50/50 hover:text-accent-500">Our Team</a>
                 </div>
             </div>
 
@@ -58,8 +56,8 @@
                     x-on:click="playersOpen = ! playersOpen"
                     @class([
                         'flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition',
-                        'bg-blue-50 text-blue-700' => $isPlayersActive,
-                        'text-slate-500 hover:text-pitch-950' => ! $isPlayersActive,
+                        'bg-blue-50/80 text-accent-500' => $isPlayersActive,
+                        'text-gray-500 hover:text-black' => ! $isPlayersActive,
                     ])
                 >
                     Players
@@ -76,9 +74,9 @@
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-1"
                     x-cloak
-                    class="absolute left-0 top-full z-50 mt-1 w-48 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
+                    class="absolute left-0 top-full z-50 mt-1 w-48 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg shadow-gray-200/50"
                 >
-                    <a href="{{ route('players.index') }}" class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">Players Directory</a>
+                    <a href="{{ route('players.index') }}" class="block px-4 py-2.5 text-sm text-gray-600 transition hover:bg-blue-50/50 hover:text-accent-500">Players Directory</a>
                 </div>
             </div>
 
@@ -96,7 +94,7 @@
         <div class="hidden md:block">
             <a
                 href="{{ route('membership.player') }}"
-                class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-700"
+                class="rounded-full bg-accent-500 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-accent-600"
             >
                 Join / Membership
             </a>
@@ -105,7 +103,7 @@
         {{-- Mobile toggle --}}
         <button
             x-on:click="open = ! open"
-            class="rounded-md p-2 text-slate-500 hover:bg-slate-100 lg:hidden"
+            class="rounded-md p-2 text-gray-500 hover:bg-gray-50 lg:hidden"
             aria-label="Toggle navigation"
         >
             <svg x-show="! open" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
@@ -122,7 +120,7 @@
         x-show="open"
         x-cloak
         x-transition.opacity
-        class="border-t border-slate-200 px-4 pb-4 lg:hidden"
+        class="border-t border-gray-100 px-4 pb-4 lg:hidden"
     >
         <div class="flex flex-col gap-1 pt-3">
             {{-- About Us --}}
@@ -157,7 +155,7 @@
             <div class="mt-3 flex flex-col gap-2">
                 <a
                     href="{{ route('membership.player') }}"
-                    class="rounded-full bg-blue-600 px-5 py-2.5 text-center text-sm font-bold text-white transition hover:bg-blue-700"
+                    class="rounded-full bg-accent-500 px-5 py-2.5 text-center text-sm font-bold text-white transition hover:bg-accent-600"
                 >
                     Join / Membership
                 </a>

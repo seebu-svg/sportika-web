@@ -15,16 +15,16 @@
     $badgeLabel = ucfirst($badge);
 @endphp
 
-<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10">
+<article class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:border-accent-400 hover:shadow-lg hover:shadow-accent-500/10">
     <a href="{{ route('players.show', $player->slug) }}" class="block">
-        <div class="relative aspect-[4/5] overflow-hidden bg-slate-100">
+        <div class="relative aspect-[4/5] overflow-hidden bg-gray-50">
             <img
                 src="{{ $player->photo_url ?? asset('images/player-fallback.svg') }}"
                 alt="{{ $player->name }}"
                 loading="lazy"
                 class="size-full object-cover transition duration-500 group-hover:scale-105"
             >
-            <div class="absolute inset-0 bg-gradient-to-t from-pitch-950/80 via-pitch-950/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
             {{-- Status badge with icon --}}
             <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider {{ $badgeColors }}">
@@ -40,7 +40,7 @@
             @endif
 
             @if ($player->jersey_number)
-                <span class="absolute right-3 top-12 font-display text-5xl leading-none text-white/20 transition group-hover:text-blue-300/50">
+                <span class="absolute right-3 top-12 font-display text-5xl leading-none text-white/20 transition group-hover:text-accent-300/50">
                     {{ str_pad((string) $player->jersey_number, 2, '0', STR_PAD_LEFT) }}
                 </span>
             @endif
@@ -62,18 +62,18 @@
         </div>
 
         <div class="flex items-center justify-between px-5 py-4">
-            <div class="flex gap-4 text-xs text-slate-500">
+            <div class="flex gap-4 text-xs text-gray-500">
                 @if ($player->goals)
-                    <span><strong class="text-blue-600">{{ $player->goals }}</strong> goals</span>
+                    <span><strong class="text-accent-500">{{ $player->goals }}</strong> goals</span>
                 @endif
                 @if ($player->assists)
-                    <span><strong class="text-blue-600">{{ $player->assists }}</strong> assists</span>
+                    <span><strong class="text-accent-500">{{ $player->assists }}</strong> assists</span>
                 @endif
                 @if (! $player->goals && ! $player->assists)
-                    <span class="text-slate-400">&mdash;</span>
+                    <span class="text-gray-400">&mdash;</span>
                 @endif
             </div>
-            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 transition group-hover:translate-x-0.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-accent-500 transition group-hover:translate-x-0.5">
                 Profile &rarr;
             </span>
         </div>

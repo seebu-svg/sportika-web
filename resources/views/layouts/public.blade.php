@@ -7,9 +7,10 @@
 
     <title>@yield('title', $settings->site_name ?? 'Sportika')</title>
     <meta name="description" content="@yield('meta_description', $settings->tagline ?? 'Player representation, scouting and sports news.')">
-    <meta name="theme-color" content="#1d4ed8">
+    <meta name="theme-color" content="#0f2557">
 
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/wolf-favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/wolf-favicon.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

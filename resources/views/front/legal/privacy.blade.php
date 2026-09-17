@@ -3,21 +3,22 @@
 @section('title', 'Privacy Policy — '.$settings->site_name)
 
 @section('content')
-    <section class="relative overflow-hidden bg-blue-700">
+    <section class="relative overflow-hidden bg-accent-600">
         <div class="bg-diagonal absolute inset-0"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <x-section-heading
                 eyebrow="Legal"
                 title="Privacy Policy"
                 subtitle="How we collect, use, and protect your personal data."
+            :inverted="true"
             />
         </div>
     </section>
 
     <section class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-        <div class="prose-custom space-y-10 text-sm leading-relaxed text-slate-400">
+        <div class="prose-custom space-y-10 text-sm leading-relaxed text-gray-400">
             <div>
-                <p class="text-xs text-slate-400">Last updated: 17 September 2026</p>
+                <p class="text-xs text-gray-400">Last updated: 17 September 2026</p>
             </div>
 
             <div>
@@ -28,7 +29,7 @@
 
             <div>
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">2. Information We Collect</h2>
-                <h3 class="mb-2 text-base font-semibold text-pitch-950">2.1 Personal Information</h3>
+                <h3 class="mb-2 text-base font-semibold text-black">2.1 Personal Information</h3>
                 <p>We may collect the following personal data:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     <li>Full name, email address, phone number, and physical address</li>
@@ -40,13 +41,13 @@
                     <li>Biographical information and personal statements</li>
                 </ul>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">2.2 Registration Data</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">2.2 Registration Data</h3>
                 <p>When you register as a player or brand/sponsor, we collect all information submitted through our registration forms, including personal details, sport-specific information, institutional affiliations, and media content.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">2.3 Contact & Communication Data</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">2.3 Contact & Communication Data</h3>
                 <p>When you contact us through our forms, email, or phone, we collect your name, email, phone number, message content, and IP address.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">2.4 Technical Data</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">2.4 Technical Data</h3>
                 <p>We may automatically collect browser type, device information, IP address, pages visited, and referring URL when you use our website.</p>
             </div>
 
@@ -72,11 +73,11 @@
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">4. Data Sharing & Disclosure</h2>
                 <p>We may share your personal data in the following circumstances:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
-                    <li><strong class="text-pitch-950">Player Profiles:</strong> Approved player information is displayed publicly on the Sportika platform. Sensitive data (CNIC, phone number) is never shown publicly.</li>
-                    <li><strong class="text-pitch-950">Service Providers:</strong> We may share data with third-party service providers who assist in operating our website (hosting, email delivery, analytics).</li>
-                    <li><strong class="text-pitch-950">Sponsors & Organisers:</strong> With your consent, we may share player profiles with sponsors or tournament organisers for legitimate opportunities.</li>
-                    <li><strong class="text-pitch-950">Legal Requirements:</strong> We may disclose data if required by law, regulation, or legal proceedings.</li>
-                    <li><strong class="text-pitch-950">Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your data may be transferred to the successor entity.</li>
+                    <li><strong class="text-black">Player Profiles:</strong> Approved player information is displayed publicly on the Sportika platform. Sensitive data (CNIC, phone number) is never shown publicly.</li>
+                    <li><strong class="text-black">Service Providers:</strong> We may share data with third-party service providers who assist in operating our website (hosting, email delivery, analytics).</li>
+                    <li><strong class="text-black">Sponsors & Organisers:</strong> With your consent, we may share player profiles with sponsors or tournament organisers for legitimate opportunities.</li>
+                    <li><strong class="text-black">Legal Requirements:</strong> We may disclose data if required by law, regulation, or legal proceedings.</li>
+                    <li><strong class="text-black">Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your data may be transferred to the successor entity.</li>
                 </ul>
             </div>
 
@@ -89,12 +90,12 @@
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">6. Your Rights</h2>
                 <p>You have the following rights regarding your personal data:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
-                    <li><strong class="text-pitch-950">Access:</strong> Request a copy of the personal data we hold about you.</li>
-                    <li><strong class="text-pitch-950">Correction:</strong> Request correction of inaccurate or incomplete data.</li>
-                    <li><strong class="text-pitch-950">Deletion:</strong> Request deletion of your personal data, subject to legal requirements.</li>
-                    <li><strong class="text-pitch-950">Objection:</strong> Object to certain uses of your data, such as marketing communications.</li>
-                    <li><strong class="text-pitch-950">Portability:</strong> Request transfer of your data to another service.</li>
-                    <li><strong class="text-pitch-950">Withdrawal of Consent:</strong> Where processing is based on consent, you may withdraw it at any time.</li>
+                    <li><strong class="text-black">Access:</strong> Request a copy of the personal data we hold about you.</li>
+                    <li><strong class="text-black">Correction:</strong> Request correction of inaccurate or incomplete data.</li>
+                    <li><strong class="text-black">Deletion:</strong> Request deletion of your personal data, subject to legal requirements.</li>
+                    <li><strong class="text-black">Objection:</strong> Object to certain uses of your data, such as marketing communications.</li>
+                    <li><strong class="text-black">Portability:</strong> Request transfer of your data to another service.</li>
+                    <li><strong class="text-black">Withdrawal of Consent:</strong> Where processing is based on consent, you may withdraw it at any time.</li>
                 </ul>
                 <p class="mt-2">To exercise any of these rights, please contact us at the email address listed on our website.</p>
             </div>
@@ -123,8 +124,8 @@
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">11. Contact Us</h2>
                 <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
-                    @if ($settings->email)<li>Email: <a href="mailto:{{ $settings->email }}" class="text-blue-600 hover:underline">{{ $settings->email }}</a></li>@endif
-                    @if ($settings->phone)<li>Phone: <a href="tel:{{ $settings->phone }}" class="text-blue-600 hover:underline">{{ $settings->phone }}</a></li>@endif
+                    @if ($settings->email)<li>Email: <a href="mailto:{{ $settings->email }}" class="text-accent-500 hover:underline">{{ $settings->email }}</a></li>@endif
+                    @if ($settings->phone)<li>Phone: <a href="tel:{{ $settings->phone }}" class="text-accent-500 hover:underline">{{ $settings->phone }}</a></li>@endif
                     @if ($settings->address)<li>Address: {{ $settings->address }}</li>@endif
                 </ul>
             </div>

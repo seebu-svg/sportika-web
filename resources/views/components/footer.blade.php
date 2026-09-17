@@ -10,16 +10,16 @@
     ]);
 @endphp
 
-<footer class="border-t border-blue-700 bg-blue-800">
+<footer class="border-t border-accent-600 bg-accent-600">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div class="grid gap-10 md:grid-cols-5">
             {{-- Brand --}}
             <div class="md:col-span-2">
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                    <span class="grid size-9 place-items-center rounded-lg bg-white font-display text-xl text-blue-700">S</span>
+                    <img src="{{ asset('images/wolf-logo.png') }}" alt="{{ $footerSettings->site_name }}" class="size-10 rounded-lg object-contain brightness-0 invert">
                     <span class="font-display text-2xl tracking-widest text-white">{{ strtoupper($footerSettings->site_name) }}</span>
                 </a>
-                <p class="mt-4 max-w-sm text-sm leading-relaxed text-blue-200">
+                <p class="mt-4 max-w-sm text-sm leading-relaxed text-blue-200/80">
                     {{ $footerSettings->tagline ?? 'Player representation, scouting and sports news.' }}
                 </p>
                 @if (! empty($socials))
@@ -29,7 +29,7 @@
                                 href="{{ $url }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="rounded-full border border-blue-600 px-3.5 py-1.5 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:text-white"
+                                class="rounded-full border border-blue-400/30 px-3.5 py-1.5 text-xs font-medium text-blue-200 transition hover:border-blue-300 hover:text-white"
                             >
                                 {{ $platform }}
                             </a>
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-blue-700 pt-6 text-xs text-blue-300 sm:flex-row">
+        <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-blue-400/20 pt-6 text-xs text-blue-300/80 sm:flex-row">
             <p>&copy; {{ date('Y') }} {{ $footerSettings->site_name }}. All rights reserved.</p>
             <div class="flex gap-4">
                 <a href="{{ route('privacy') }}" class="transition hover:text-white">Privacy Policy</a>

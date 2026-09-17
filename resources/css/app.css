@@ -6,20 +6,20 @@
 @source '../**/*.js';
 
 @theme {
-    /* Brand palette — premium blue & white sports brand */
-    --color-pitch-50: #f8fafc;
-    --color-pitch-100: #f1f5f9;
-    --color-pitch-950: #0f172a;
-    --color-pitch-900: #1e293b;
-    --color-pitch-800: #334155;
-    --color-pitch-700: #475569;
-    --color-pitch-600: #64748b;
+    /* Brand palette — premium dark navy & white sports brand */
+    --color-pitch-50: #ffffff;
+    --color-pitch-100: #f8fafc;
+    --color-pitch-950: #000000;
+    --color-pitch-900: #0a0f1a;
+    --color-pitch-800: #1a1f2e;
+    --color-pitch-700: #374151;
+    --color-pitch-600: #6b7280;
 
     --color-accent-200: #dbeafe;
     --color-accent-300: #93c5fd;
-    --color-accent-400: #3b82f6;
-    --color-accent-500: #2563eb;
-    --color-accent-600: #1d4ed8;
+    --color-accent-400: #1e40af;
+    --color-accent-500: #1e3a8a;
+    --color-accent-600: #0f2557;
 
     --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
     --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
@@ -33,19 +33,19 @@ html {
 }
 
 body {
-    @apply bg-pitch-50 font-sans text-slate-700 antialiased;
+    @apply bg-white font-sans text-black antialiased;
 }
 
 ::selection {
-    @apply bg-blue-600 text-white;
+    @apply bg-accent-600 text-white;
 }
 
 /* Sporty diagonal section separators */
 .bg-diagonal {
     background-image: repeating-linear-gradient(
         -45deg,
-        rgb(59 130 246 / 0.06) 0px,
-        rgb(59 130 246 / 0.06) 2px,
+        rgb(15 37 87 / 0.04) 0px,
+        rgb(15 37 87 / 0.04) 2px,
         transparent 2px,
         transparent 14px
     );
@@ -54,7 +54,7 @@ body {
 /* ---- Rich text (admin-managed content) ---- */
 
 .rich-content {
-    @apply text-slate-600;
+    @apply text-gray-700;
 }
 
 .rich-content > * + * {
@@ -62,19 +62,19 @@ body {
 }
 
 .rich-content h2 {
-    @apply font-display text-3xl tracking-wide text-pitch-950 uppercase;
+    @apply font-display text-3xl tracking-wide text-black uppercase;
 }
 
 .rich-content h3 {
-    @apply text-xl font-semibold text-pitch-900;
+    @apply text-xl font-semibold text-black;
 }
 
 .rich-content strong {
-    @apply text-pitch-950;
+    @apply text-black;
 }
 
 .rich-content a {
-    @apply text-blue-600 underline decoration-blue-600/40 underline-offset-4 hover:text-blue-500;
+    @apply text-accent-500 underline decoration-accent-500/40 underline-offset-4 hover:text-accent-400;
 }
 
 .rich-content ul {
@@ -86,5 +86,5 @@ body {
 }
 
 .rich-content blockquote {
-    @apply border-l-2 border-blue-500 pl-4 text-slate-600 italic;
+    @apply border-l-2 border-accent-500 pl-4 text-gray-600 italic;
 }

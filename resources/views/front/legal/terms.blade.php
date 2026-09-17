@@ -3,21 +3,22 @@
 @section('title', 'Terms of Service — '.$settings->site_name)
 
 @section('content')
-    <section class="relative overflow-hidden bg-blue-700">
+    <section class="relative overflow-hidden bg-accent-600">
         <div class="bg-diagonal absolute inset-0"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <x-section-heading
                 eyebrow="Legal"
                 title="Terms of Service"
                 subtitle="Please read these terms carefully before using the Sportika platform."
+            :inverted="true"
             />
         </div>
     </section>
 
     <section class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-        <div class="prose-custom space-y-10 text-sm leading-relaxed text-slate-400">
+        <div class="prose-custom space-y-10 text-sm leading-relaxed text-gray-400">
             <div>
-                <p class="text-xs text-slate-400">Last updated: 17 September 2026</p>
+                <p class="text-xs text-gray-400">Last updated: 17 September 2026</p>
             </div>
 
             <div>
@@ -41,37 +42,37 @@
 
             <div>
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">3. User Accounts & Registration</h2>
-                <h3 class="mb-2 text-base font-semibold text-pitch-950">3.1 Player Registration</h3>
+                <h3 class="mb-2 text-base font-semibold text-black">3.1 Player Registration</h3>
                 <p>When you register as a player, you agree to provide accurate, current, and complete information. You are responsible for maintaining the accuracy of your profile information and updating it as necessary.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">3.2 Brand/Sponsor Registration</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">3.2 Brand/Sponsor Registration</h3>
                 <p>When you register as a brand or sponsor, you represent that you are an authorised representative of the entity you are registering on behalf of.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">3.3 Profile Approval</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">3.3 Profile Approval</h3>
                 <p>All registrations are subject to review and approval by our admin team. Sportika reserves the right to approve, reject, or remove any registration at its sole discretion. Approval of a registration does not constitute an endorsement of the individual or entity.</p>
             </div>
 
             <div>
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">4. Player Profiles & Content</h2>
-                <h3 class="mb-2 text-base font-semibold text-pitch-950">4.1 Profile Content</h3>
+                <h3 class="mb-2 text-base font-semibold text-black">4.1 Profile Content</h3>
                 <p>By submitting content for your player profile (photos, videos, statistics, achievements, biographical information), you grant Sportika a non-exclusive, worldwide, royalty-free licence to display, distribute, and promote this content on the platform and associated marketing channels.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">4.2 Accuracy of Information</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">4.2 Accuracy of Information</h3>
                 <p>Players are responsible for the accuracy of the information in their profiles. Sportika verifies player identities and credentials but does not guarantee the accuracy of all player-submitted data. Stats and achievements marked as "Unverified" have not been independently confirmed.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">4.3 Status Badges</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">4.3 Status Badges</h3>
                 <p>Player status badges (Unverified, Verified, Featured) reflect Sportika's assessment of profile completeness and authenticity. These badges are for informational purposes and do not constitute a guarantee or warranty of any kind.</p>
             </div>
 
             <div>
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">5. Intellectual Property</h2>
-                <h3 class="mb-2 text-base font-semibold text-pitch-950">5.1 Our Content</h3>
+                <h3 class="mb-2 text-base font-semibold text-black">5.1 Our Content</h3>
                 <p>The Sportika name, logo, branding, website design, and original content (excluding user-submitted content) are the property of Sportika and are protected by copyright, trademark, and other intellectual property laws.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">5.2 User Content</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">5.2 User Content</h3>
                 <p>Players retain ownership of their photographs, videos, and other content submitted to the platform. By submitting content, you confirm that you own or have the necessary rights to share the content and that it does not infringe on any third-party rights.</p>
 
-                <h3 class="mt-4 mb-2 text-base font-semibold text-pitch-950">5.3 Prohibited Content</h3>
+                <h3 class="mt-4 mb-2 text-base font-semibold text-black">5.3 Prohibited Content</h3>
                 <p>You must not submit content that is illegal, defamatory, obscene, or infringes on the intellectual property rights of others. Sportika reserves the right to remove any content that violates these Terms.</p>
             </div>
 
@@ -134,8 +135,8 @@
                 <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">15. Contact Us</h2>
                 <p>If you have questions about these Terms, please contact us:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
-                    @if ($settings->email)<li>Email: <a href="mailto:{{ $settings->email }}" class="text-blue-600 hover:underline">{{ $settings->email }}</a></li>@endif
-                    @if ($settings->phone)<li>Phone: <a href="tel:{{ $settings->phone }}" class="text-blue-600 hover:underline">{{ $settings->phone }}</a></li>@endif
+                    @if ($settings->email)<li>Email: <a href="mailto:{{ $settings->email }}" class="text-accent-500 hover:underline">{{ $settings->email }}</a></li>@endif
+                    @if ($settings->phone)<li>Phone: <a href="tel:{{ $settings->phone }}" class="text-accent-500 hover:underline">{{ $settings->phone }}</a></li>@endif
                     @if ($settings->address)<li>Address: {{ $settings->address }}</li>@endif
                 </ul>
             </div>
