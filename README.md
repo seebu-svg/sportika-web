@@ -1,59 +1,239 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sportika — Player Management Agency
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern web application for a player management agency, built with **Laravel 12** and **Filament 3**. Features a public-facing website with player portfolios, news blog, and contact system, plus a full-featured admin panel for content management.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Filament](https://img.shields.io/badge/Filament-3-F46A35?style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Public Website
+- **Home Page** — Hero section, featured players, latest news
+- **About Page** — Editable content managed from admin panel
+- **Players Directory** — Filterable listing by position, nationality, search
+- **Player Portfolio** — Individual player pages with photo, stats, bio, social links
+- **News & Blog** — Rich-text articles with categories, cover images, reading time
+- **Contact Form** — Honeypot spam protection, email notifications to admin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Admin Panel (Filament)
+- **Dashboard** — Stats overview (players, posts, unread messages)
+- **Players CRUD** — Full management with photo upload, career stats, honours, social links
+- **Posts CRUD** — Rich-text editor, categories, scheduling, featured flag, SEO fields
+- **Categories** — Blog category management with post counts
+- **Messages Inbox** — View/read/reply to contact form submissions
+- **Site Settings** — Editable homepage content, about page, contact details, social URLs
 
-## Learning Laravel
+## Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+| Component | Technology |
+|-----------|------------|
+| Backend | Laravel 12 (PHP 8.2+) |
+| Admin Panel | Filament 3 |
+| CSS Framework | Tailwind CSS v4 |
+| JavaScript | Alpine.js |
+| Fonts | Inter Variable, Bebas Neue |
+| Build Tool | Vite 6 |
+| Database | MySQL 8 (production) / SQLite (local dev) |
+| Mail | SMTP (Hostinger) / Log (dev) |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requirements
 
-## Laravel Sponsors
+- PHP 8.2+ with extensions: `pdo_mysql`, `mbstring`, `xml`, `curl`, `gd`, `zip`, `intl`, `bcmath`
+- Composer 2.x
+- Node.js 18+ & npm
+- MySQL 8.0+ (production) or SQLite (development)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installation
 
-### Premium Partners
+### Local Development
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+# Clone the repository
+git clone https://github.com/seebu-svg/sportika-web.git
+cd sportika-web
 
-## Contributing
+# Install PHP dependencies
+composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Install JS dependencies and build assets
+npm install && npm run build
 
-## Code of Conduct
+# Set up environment
+cp .env.example .env
+php artisan key:generate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Create database (SQLite for local dev)
+touch database/database.sqlite
 
-## Security Vulnerabilities
+# Run migrations and seed
+php artisan migrate:fresh --seed
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Start development server
+php artisan serve
+```
+
+### Access the Application
+
+| Page | URL |
+|------|-----|
+| Public Site | http://localhost:8000 |
+| Admin Panel | http://localhost:8000/admin |
+| Admin Login | `admin@sportika.test` / `password` |
+
+> **Important:** Change the admin password immediately after first login.
+
+## Seeded Data
+
+The seeder creates sample content for testing:
+
+- **1 Admin User** — `admin@sportika.test` / `password`
+- **10 Players** — 4 featured, with unique SVG portraits
+- **6 Blog Posts** — across 5 categories
+- **5 Categories** — Transfers, Match Reports, Training, Club News, Interviews
+- **9 Messages** — 6 unread, 3 read
+- **Site Settings** — Fully populated with sample content
+
+## Project Structure
+
+```
+sportika-web/
+├── app/
+│   ├── Filament/           # Admin panel resources & pages
+│   │   ├── Pages/          # Site settings page
+│   │   ├── Resources/      # Player, Post, Category, Message CRUD
+│   │   └── Widgets/        # Dashboard stats
+│   ├── Http/
+│   │   ├── Controllers/    # Public frontend controllers
+│   │   └── Requests/       # Form validation
+│   ├── Mail/               # Contact message email
+│   └── Models/             # Eloquent models
+├── database/
+│   ├── factories/          # Model factories
+│   ├── migrations/         # Database schema
+│   └── seeders/            # Sample data
+├── deploy/                 # Hostinger deployment assets
+├── resources/
+│   ├── css/                # Tailwind + custom styles
+│   ├── js/                 # Alpine.js setup
+│   └── views/              # Blade templates
+│       ├── components/     # Reusable UI components
+│       ├── front/          # Public pages
+│       ├── layouts/        # Master layout
+│       └── mail/           # Email templates
+├── routes/                 # Web routes
+└── .env.hostinger          # Production env template
+```
+
+## Public Routes
+
+| Route | Controller | Description |
+|-------|------------|-------------|
+| `/` | `HomeController` | Homepage with hero, featured players, latest posts |
+| `/about` | `AboutController` | About page with editable content |
+| `/players` | `PlayerController@index` | Filterable player directory |
+| `/players/{slug}` | `PlayerController@show` | Individual player portfolio |
+| `/news` | `PostController@index` | Blog listing with category filters |
+| `/news/{slug}` | `PostController@show` | Single blog post |
+| `/contact` | `ContactController` | Contact form with honeypot |
+
+## Hostinger Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete instructions. Quick summary:
+
+1. Upload project to Hostinger (FTP or Git)
+2. Copy `.env.hostinger` to `.env` and configure MySQL + SMTP
+3. Run `bash deploy/deploy.sh`
+4. Set permissions: `chmod -R 775 storage bootstrap/cache`
+
+### Deployment Assets
+
+| File | Purpose |
+|------|---------|
+| `.env.hostinger` | Production environment template |
+| `deploy/deploy.sh` | One-command deployment script |
+| `deploy/hostinger-root-htaccess` | Root `.htaccess` for Apache |
+| `deploy/hostinger-user-ini` | PHP configuration overrides |
+
+## Configuration
+
+### Environment Variables
+
+Key settings in `.env`:
+
+```env
+APP_NAME=Sportika
+APP_URL=https://yourdomain.com
+
+# Database (MySQL for production)
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+# Mail (Hostinger SMTP)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.hostinger.com
+MAIL_PORT=465
+MAIL_USERNAME=noreply@yourdomain.com
+MAIL_PASSWORD=your_password
+```
+
+### Admin Panel
+
+The Filament admin panel is accessible at `/admin`. Only users with `is_admin = true` can access it.
+
+To create a new admin user:
+
+```bash
+php artisan tinker
+```
+
+```php
+\App\Models\User::create([
+    'name' => 'Your Name',
+    'email' => 'your@email.com',
+    'password' => \Illuminate\Support\Facades\Hash::make('your-password'),
+    'is_admin' => true,
+]);
+```
+
+## Building for Production
+
+```bash
+# Build production assets
+npm run build
+
+# Cache configuration
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Optimize autoloader
+composer install --no-dev --optimize-autoloader
+```
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| 500 Internal Server Error | Check `storage/logs/laravel.log`. Ensure `storage/` and `bootstrap/cache/` are writable (775). |
+| Admin panel shows 403 | Ensure the user has `is_admin = true` in the database. |
+| Images not loading | Run `php artisan storage:link`. Check `FILESYSTEM_DISK=public` in `.env`. |
+| CSS/JS not loading | Run `npm run build` and ensure `public/build/` exists. |
+| Contact form 419 | CSRF token issue — clear browser cache and ensure session config is correct. |
+| Database connection refused | Verify MySQL credentials in `.env`. |
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is proprietary software created for Sportika Player Management Agency.
+
+## Credits
+
+- **Framework:** [Laravel](https://laravel.com)
+- **Admin Panel:** [Filament](https://filamentphp.com)
+- **CSS:** [Tailwind CSS](https://tailwindcss.com)
+- **Fonts:** [Inter](https://rsms.me/inter/) by Rasmus Andersson, [Bebas Neue](https://github.com/dharmatype/Bebas-Neue) by Dharma Type
