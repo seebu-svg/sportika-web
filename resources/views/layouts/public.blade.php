@@ -7,7 +7,7 @@
 
     <title>@yield('title', $settings->site_name ?? 'Sportika')</title>
     <meta name="description" content="@yield('meta_description', $settings->tagline ?? 'Player representation, scouting and sports news.')">
-    <meta name="theme-color" content="#05070c">
+    <meta name="theme-color" content="#1d4ed8">
 
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 

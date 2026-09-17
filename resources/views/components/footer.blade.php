@@ -10,16 +10,16 @@
     ]);
 @endphp
 
-<footer class="border-t border-white/10 bg-pitch-900">
+<footer class="border-t border-blue-700 bg-blue-800">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div class="grid gap-10 md:grid-cols-5">
             {{-- Brand --}}
             <div class="md:col-span-2">
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                    <span class="grid size-9 place-items-center rounded-lg bg-accent-400 font-display text-xl text-pitch-950">S</span>
+                    <span class="grid size-9 place-items-center rounded-lg bg-white font-display text-xl text-blue-700">S</span>
                     <span class="font-display text-2xl tracking-widest text-white">{{ strtoupper($footerSettings->site_name) }}</span>
                 </a>
-                <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
+                <p class="mt-4 max-w-sm text-sm leading-relaxed text-blue-200">
                     {{ $footerSettings->tagline ?? 'Player representation, scouting and sports news.' }}
                 </p>
                 @if (! empty($socials))
@@ -29,7 +29,7 @@
                                 href="{{ $url }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300"
+                                class="rounded-full border border-blue-600 px-3.5 py-1.5 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:text-white"
                             >
                                 {{ $platform }}
                             </a>
@@ -42,12 +42,12 @@
             <div>
                 <h3 class="font-display text-lg tracking-wider text-white">Explore</h3>
                 <ul class="mt-4 space-y-2.5 text-sm">
-                    <li><a href="{{ route('about') }}" class="text-slate-400 transition hover:text-accent-300">About Us</a></li>
-                    <li><a href="{{ route('team') }}" class="text-slate-400 transition hover:text-accent-300">Team</a></li>
-                    <li><a href="{{ route('players.index') }}" class="text-slate-400 transition hover:text-accent-300">Players</a></li>
-                    <li><a href="{{ route('tournaments.index') }}" class="text-slate-400 transition hover:text-accent-300">Tournaments</a></li>
-                    <li><a href="{{ route('gallery') }}" class="text-slate-400 transition hover:text-accent-300">Champions Gallery</a></li>
-                    <li><a href="{{ route('sponsors') }}" class="text-slate-400 transition hover:text-accent-300">Sponsors</a></li>
+                    <li><a href="{{ route('about') }}" class="text-blue-200 transition hover:text-white">About Us</a></li>
+                    <li><a href="{{ route('team') }}" class="text-blue-200 transition hover:text-white">Team</a></li>
+                    <li><a href="{{ route('players.index') }}" class="text-blue-200 transition hover:text-white">Players</a></li>
+                    <li><a href="{{ route('tournaments.index') }}" class="text-blue-200 transition hover:text-white">Tournaments</a></li>
+                    <li><a href="{{ route('gallery') }}" class="text-blue-200 transition hover:text-white">Champions Gallery</a></li>
+                    <li><a href="{{ route('sponsors') }}" class="text-blue-200 transition hover:text-white">Sponsors</a></li>
                 </ul>
             </div>
 
@@ -55,38 +55,38 @@
             <div>
                 <h3 class="font-display text-lg tracking-wider text-white">Media</h3>
                 <ul class="mt-4 space-y-2.5 text-sm">
-                    <li><a href="{{ route('posts.index') }}" class="text-slate-400 transition hover:text-accent-300">News</a></li>
-                    <li><a href="{{ route('blogs.index') }}" class="text-slate-400 transition hover:text-accent-300">Blogs</a></li>
-                    <li><a href="{{ route('podcast') }}" class="text-slate-400 transition hover:text-accent-300">Podcast</a></li>
-                    <li><a href="{{ route('membership.player') }}" class="text-slate-400 transition hover:text-accent-300">Join as Player</a></li>
-                    <li><a href="{{ route('membership.brand') }}" class="text-slate-400 transition hover:text-accent-300">Join as Brand</a></li>
-                    <li><a href="{{ route('faq') }}" class="text-slate-400 transition hover:text-accent-300">FAQs</a></li>
+                    <li><a href="{{ route('posts.index') }}" class="text-blue-200 transition hover:text-white">News</a></li>
+                    <li><a href="{{ route('blogs.index') }}" class="text-blue-200 transition hover:text-white">Blogs</a></li>
+                    <li><a href="{{ route('podcast') }}" class="text-blue-200 transition hover:text-white">Podcast</a></li>
+                    <li><a href="{{ route('membership.player') }}" class="text-blue-200 transition hover:text-white">Join as Player</a></li>
+                    <li><a href="{{ route('membership.brand') }}" class="text-blue-200 transition hover:text-white">Join as Brand</a></li>
+                    <li><a href="{{ route('faq') }}" class="text-blue-200 transition hover:text-white">FAQs</a></li>
                 </ul>
             </div>
 
             {{-- Contact --}}
             <div>
                 <h3 class="font-display text-lg tracking-wider text-white">Contact</h3>
-                <ul class="mt-4 space-y-2.5 text-sm text-slate-400">
+                <ul class="mt-4 space-y-2.5 text-sm text-blue-200">
                     @if ($footerSettings->email)
-                        <li><a href="mailto:{{ $footerSettings->email }}" class="transition hover:text-accent-300">{{ $footerSettings->email }}</a></li>
+                        <li><a href="mailto:{{ $footerSettings->email }}" class="transition hover:text-white">{{ $footerSettings->email }}</a></li>
                     @endif
                     @if ($footerSettings->phone)
-                        <li><a href="tel:{{ preg_replace('/[^\d+]/', '', $footerSettings->phone) }}" class="transition hover:text-accent-300">{{ $footerSettings->phone }}</a></li>
+                        <li><a href="tel:{{ preg_replace('/[^\d+]/', '', $footerSettings->phone) }}" class="transition hover:text-white">{{ $footerSettings->phone }}</a></li>
                     @endif
                     @if ($footerSettings->address)
                         <li>{{ $footerSettings->address }}</li>
                     @endif
-                    <li class="pt-1"><a href="{{ route('contact') }}" class="text-accent-400 transition hover:text-accent-300">Contact form &rarr;</a></li>
+                    <li class="pt-1"><a href="{{ route('contact') }}" class="text-white transition hover:text-blue-200">Contact form &rarr;</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
+        <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-blue-700 pt-6 text-xs text-blue-300 sm:flex-row">
             <p>&copy; {{ date('Y') }} {{ $footerSettings->site_name }}. All rights reserved.</p>
             <div class="flex gap-4">
-                <a href="{{ route('privacy') }}" class="transition hover:text-slate-300">Privacy Policy</a>
-                <a href="{{ route('terms') }}" class="transition hover:text-slate-300">Terms of Service</a>
+                <a href="{{ route('privacy') }}" class="transition hover:text-white">Privacy Policy</a>
+                <a href="{{ route('terms') }}" class="transition hover:text-white">Terms of Service</a>
             </div>
         </div>
     </div>

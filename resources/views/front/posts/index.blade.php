@@ -3,7 +3,7 @@
 @section('title', 'News & Blogs')
 
 @section('content')
-    <section class="relative overflow-hidden bg-pitch-900">
+    <section class="relative overflow-hidden bg-blue-700">
         <div class="bg-diagonal absolute inset-0"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <x-section-heading
@@ -20,11 +20,11 @@
                         name="search"
                         value="{{ request('search') }}"
                         placeholder="Search articles…"
-                        class="flex-1 rounded-lg border border-white/10 bg-pitch-800 px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none focus:border-accent-400/60"
+                        class="flex-1 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-pitch-950 placeholder-slate-500 outline-none focus:border-blue-400"
                     >
                     <button
                         type="submit"
-                        class="rounded-lg bg-accent-400 px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-accent-300"
+                        class="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-blue-500"
                     >
                         Search
                     </button>
@@ -36,8 +36,8 @@
                         @class([
                             'rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition',
                             request()->filled('category')
-                                ? 'border border-white/10 text-slate-300 hover:border-accent-400/50 hover:text-accent-300'
-                                : 'bg-accent-400 text-pitch-950',
+                                ? 'border border-slate-200 text-slate-600 hover:border-blue-300 hover:text-blue-500'
+                                : 'bg-blue-600 text-pitch-950',
                         ])
                     >
                         All
@@ -48,8 +48,8 @@
                             @class([
                                 'rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition',
                                 request('category') === $category->slug
-                                    ? 'bg-accent-400 text-pitch-950'
-                                    : 'border border-white/10 text-slate-300 hover:border-accent-400/50 hover:text-accent-300',
+                                    ? 'bg-blue-600 text-pitch-950'
+                                    : 'border border-slate-200 text-slate-600 hover:border-blue-300 hover:text-blue-500',
                             ])
                         >
                             {{ $category->name }}
@@ -64,7 +64,7 @@
     <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         {{-- Featured post --}}
         @if ($featured)
-            <a href="{{ route('posts.show', $featured->slug) }}" class="group mb-10 grid overflow-hidden rounded-3xl border border-white/10 bg-pitch-800 transition hover:border-accent-400/40 md:grid-cols-2">
+            <a href="{{ route('posts.show', $featured->slug) }}" class="group mb-10 grid overflow-hidden rounded-3xl border border-slate-200 bg-white transition hover:border-blue-300 md:grid-cols-2">
                 <div class="aspect-video overflow-hidden md:aspect-auto">
                     <img
                         src="{{ $featured->cover_url ?? asset('images/post-fallback.svg') }}"
@@ -73,17 +73,17 @@
                     >
                 </div>
                 <div class="flex flex-col justify-center p-8 lg:p-12">
-                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-accent-400">Featured story</p>
+                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-blue-600">Featured story</p>
                     @if ($featured->category)
-                        <span class="mt-3 inline-flex w-fit rounded-full border border-white/10 px-3 py-1 text-[11px] uppercase tracking-wider text-slate-300">
+                        <span class="mt-3 inline-flex w-fit rounded-full border border-slate-200 px-3 py-1 text-[11px] uppercase tracking-wider text-slate-600">
                             {{ $featured->category->name }}
                         </span>
                     @endif
-                    <h2 class="mt-4 font-display text-3xl uppercase tracking-wide text-white transition group-hover:text-accent-300 sm:text-4xl">
+                    <h2 class="mt-4 font-display text-3xl uppercase tracking-wide text-pitch-950 transition group-hover:text-blue-500 sm:text-4xl">
                         {{ $featured->title }}
                     </h2>
                     <p class="mt-4 line-clamp-3 text-slate-400">{{ $featured->excerpt }}</p>
-                    <p class="mt-6 text-sm text-slate-500">
+                    <p class="mt-6 text-sm text-slate-400">
                         {{ $featured->published_at?->translatedFormat('d M Y') }}
                         &middot; {{ $featured->reading_time }} min read
                     </p>
@@ -92,7 +92,7 @@
         @endif
 
         @if ($posts->isEmpty())
-            <div class="rounded-2xl border border-dashed border-white/15 bg-pitch-900 px-6 py-20 text-center">
+            <div class="rounded-2xl border border-dashed border-white/15 bg-blue-700 px-6 py-20 text-center">
                 <p class="font-display text-3xl tracking-wide text-white">No articles yet</p>
                 <p class="mt-2 text-slate-400">Check back soon — the newsroom is warming up.</p>
             </div>

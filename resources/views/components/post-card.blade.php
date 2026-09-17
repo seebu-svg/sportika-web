@@ -1,6 +1,6 @@
 @props(['post'])
 
-<article class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-pitch-800 transition duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-xl hover:shadow-accent-400/5">
+<article class="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10">
     <a href="{{ route('posts.show', $post->slug) }}" class="relative block aspect-video overflow-hidden">
         <img
             src="{{ $post->cover_url ?? asset('images/post-fallback.svg') }}"
@@ -9,29 +9,29 @@
             class="size-full object-cover transition duration-500 group-hover:scale-105"
         >
         @if ($post->category)
-            <span class="absolute left-3 top-3 rounded-full bg-accent-400 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-pitch-950">
+            <span class="absolute left-3 top-3 rounded-full bg-blue-600 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
                 {{ $post->category->name }}
             </span>
         @endif
     </a>
 
     <div class="flex flex-1 flex-col p-5">
-        <p class="text-xs text-slate-500">
+        <p class="text-xs text-slate-400">
             {{ $post->published_at?->translatedFormat('d M Y') ?? now()->translatedFormat('d M Y') }}
             &middot; {{ $post->reading_time }} min read
         </p>
 
-        <h3 class="mt-2 text-lg font-semibold leading-snug text-white transition group-hover:text-accent-300">
+        <h3 class="mt-2 text-lg font-semibold leading-snug text-pitch-950 transition group-hover:text-blue-600">
             <a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
         </h3>
 
-        <p class="mt-2 line-clamp-3 text-sm text-slate-400">
+        <p class="mt-2 line-clamp-3 text-sm text-slate-500">
             {{ $post->excerpt }}
         </p>
 
-        <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-accent-400">
+        <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-blue-600">
             Read article
-            <span class="transition group-hover:translate-x-0.5">→</span>
+            <span class="transition group-hover:translate-x-0.5">&rarr;</span>
         </span>
     </div>
 </article>

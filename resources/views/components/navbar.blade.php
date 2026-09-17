@@ -7,14 +7,14 @@
 
 <header
     x-data="{ open: false, aboutOpen: false, playersOpen: false }"
-    class="sticky top-0 z-50 border-b border-white/10 bg-pitch-950/80 backdrop-blur-md"
+    class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm"
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-            <span class="grid size-9 place-items-center rounded-lg bg-accent-400 font-display text-xl text-pitch-950">
+            <span class="grid size-9 place-items-center rounded-lg bg-blue-600 font-display text-xl text-white">
                 S
             </span>
-            <span class="font-display text-2xl tracking-widest text-white">
+            <span class="font-display text-2xl tracking-widest text-pitch-950">
                 {{ strtoupper($navSettings->site_name) }}
             </span>
         </a>
@@ -27,8 +27,8 @@
                     x-on:click="aboutOpen = ! aboutOpen"
                     @class([
                         'flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition',
-                        'bg-white/5 text-white' => $isAboutActive,
-                        'text-slate-300 hover:text-white' => ! $isAboutActive,
+                        'bg-blue-50 text-blue-700' => $isAboutActive,
+                        'text-slate-500 hover:text-pitch-950' => ! $isAboutActive,
                     ])
                 >
                     About Us
@@ -45,10 +45,10 @@
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-1"
                     x-cloak
-                    class="absolute left-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-xl border border-white/10 bg-pitch-800 shadow-xl shadow-black/30"
+                    class="absolute left-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
                 >
-                    <a href="{{ route('about') }}" class="block px-4 py-2.5 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white">Our Story</a>
-                    <a href="{{ route('team') }}" class="block px-4 py-2.5 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white">Our Team</a>
+                    <a href="{{ route('about') }}" class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">Our Story</a>
+                    <a href="{{ route('team') }}" class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">Our Team</a>
                 </div>
             </div>
 
@@ -58,8 +58,8 @@
                     x-on:click="playersOpen = ! playersOpen"
                     @class([
                         'flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition',
-                        'bg-white/5 text-white' => $isPlayersActive,
-                        'text-slate-300 hover:text-white' => ! $isPlayersActive,
+                        'bg-blue-50 text-blue-700' => $isPlayersActive,
+                        'text-slate-500 hover:text-pitch-950' => ! $isPlayersActive,
                     ])
                 >
                     Players
@@ -76,9 +76,9 @@
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-1"
                     x-cloak
-                    class="absolute left-0 top-full z-50 mt-1 w-48 overflow-hidden rounded-xl border border-white/10 bg-pitch-800 shadow-xl shadow-black/30"
+                    class="absolute left-0 top-full z-50 mt-1 w-48 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50"
                 >
-                    <a href="{{ route('players.index') }}" class="block px-4 py-2.5 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white">Players Directory</a>
+                    <a href="{{ route('players.index') }}" class="block px-4 py-2.5 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">Players Directory</a>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
         <div class="hidden md:block">
             <a
                 href="{{ route('membership.player') }}"
-                class="rounded-full bg-accent-400 px-5 py-2.5 text-sm font-bold text-pitch-950 transition hover:bg-accent-300"
+                class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-blue-700"
             >
                 Join / Membership
             </a>
@@ -105,7 +105,7 @@
         {{-- Mobile toggle --}}
         <button
             x-on:click="open = ! open"
-            class="rounded-md p-2 text-slate-300 hover:bg-white/5 lg:hidden"
+            class="rounded-md p-2 text-slate-500 hover:bg-slate-100 lg:hidden"
             aria-label="Toggle navigation"
         >
             <svg x-show="! open" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
@@ -122,32 +122,32 @@
         x-show="open"
         x-cloak
         x-transition.opacity
-        class="border-t border-white/10 px-4 pb-4 lg:hidden"
+        class="border-t border-slate-200 px-4 pb-4 lg:hidden"
     >
         <div class="flex flex-col gap-1 pt-3">
             {{-- About Us --}}
-            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">About Us</p>
+            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">About Us</p>
             <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">Our Story</x-nav-link>
             <x-nav-link href="{{ route('team') }}" :active="request()->routeIs('team')">Our Team</x-nav-link>
 
             {{-- Players --}}
-            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">Players</p>
+            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Players</p>
             <x-nav-link href="{{ route('players.index') }}" :active="request()->routeIs('players.*')">Players Directory</x-nav-link>
 
             {{-- Explore --}}
-            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">Explore</p>
+            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Explore</p>
             <x-nav-link href="{{ route('tournaments.index') }}" :active="request()->routeIs('tournaments.*')">Tournaments</x-nav-link>
             <x-nav-link href="{{ route('gallery') }}" :active="request()->routeIs('gallery')">Champions Gallery</x-nav-link>
             <x-nav-link href="{{ route('sponsors') }}" :active="request()->routeIs('sponsors')">Sponsors / Partners</x-nav-link>
 
             {{-- Media --}}
-            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">Media</p>
+            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Media</p>
             <x-nav-link href="{{ route('podcast') }}" :active="request()->routeIs('podcast.*')">Podcast</x-nav-link>
             <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.*')">News</x-nav-link>
             <x-nav-link href="{{ route('blogs.index') }}" :active="request()->routeIs('blogs.*')">Blogs</x-nav-link>
 
             {{-- Membership & Contact --}}
-            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">Membership</p>
+            <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Membership</p>
             <x-nav-link href="{{ route('membership.player') }}" :active="request()->routeIs('membership.player')">Join as Player</x-nav-link>
             <x-nav-link href="{{ route('membership.brand') }}" :active="request()->routeIs('membership.brand')">Join as Brand</x-nav-link>
 
@@ -157,7 +157,7 @@
             <div class="mt-3 flex flex-col gap-2">
                 <a
                     href="{{ route('membership.player') }}"
-                    class="rounded-full bg-accent-400 px-5 py-2.5 text-center text-sm font-bold text-pitch-950 transition hover:bg-accent-300"
+                    class="rounded-full bg-blue-600 px-5 py-2.5 text-center text-sm font-bold text-white transition hover:bg-blue-700"
                 >
                     Join / Membership
                 </a>
