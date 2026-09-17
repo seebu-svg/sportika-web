@@ -21,8 +21,6 @@
 
         {{-- Desktop navigation --}}
         <div class="hidden items-center gap-0.5 lg:flex">
-            <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Home</x-nav-link>
-
             {{-- About Us dropdown --}}
             <div class="relative" x-on:click.away="aboutOpen = false">
                 <button
@@ -127,8 +125,6 @@
         class="border-t border-white/10 px-4 pb-4 lg:hidden"
     >
         <div class="flex flex-col gap-1 pt-3">
-            <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Home</x-nav-link>
-
             {{-- About Us --}}
             <p class="mt-2 px-4 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">About Us</p>
             <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">Our Story</x-nav-link>
