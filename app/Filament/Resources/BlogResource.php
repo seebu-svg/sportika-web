@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostResource\Pages;
-use App\Models\Category;
+use App\Filament\Resources\BlogResource\Pages;
 use App\Models\Post;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -24,24 +24,36 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class PostResource extends Resource
+class BlogResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static ?string $navigationGroup = 'Content';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Blog Posts';
+
+    protected static ?string $modelLabel = 'Blog Post';
+
+    protected static ?string $pluralModelLabel = 'Blog Posts';
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    protected static ?string $slug = 'blog-posts';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Hidden::make('post_type')
+                    ->default('blog'),
+
                 Section::make('Article')
                     ->columns(2)
                     ->schema([
@@ -52,10 +64,10 @@ class PostResource extends Resource
                             ->hintIcon('heroicon-m-question-mark-circle')
                             ->hintIconTooltip('Leave the slug blank to auto-generate it from the title.'),
                         TextInput::make('slug')
-                            ->unique(ignoreRecord: true)
+                            ->unique(table: Post::class, ignoreRecord: true)
                             ->maxLength(200),
                         Select::make('category_id')
-                            ->label('Category')
+                            ->label('Tag / Category')
                             ->relationship('category', 'name')
                             ->createOptionForm([
                                 TextInput::make('name')
@@ -63,11 +75,11 @@ class PostResource extends Resource
                                     ->maxLength(80)
                                     ->live(onBlur: true),
                                 TextInput::make('slug')
-                                    ->unique(ignoreRecord: true)
+                                    ->unique(table: 'categories', ignoreRecord: true)
                                     ->maxLength(100),
                             ])
                             ->native(false)
-                            ->placeholder('Uncategorised'),
+                            ->placeholder('No tag'),
                         Select::make('author_id')
                             ->label('Author')
                             ->relationship('author', 'name')
@@ -81,7 +93,7 @@ class PostResource extends Resource
                             ->default(now())
                             ->helperText('Future dates will schedule the post — it stays hidden until then.'),
                         Toggle::make('is_featured')
-                            ->helperText('The most recent featured post is highlighted on the news page.'),
+                            ->helperText('Featured blog posts are highlighted on the blogs page.'),
                     ]),
 
                 Section::make('Cover & summary')
@@ -90,7 +102,7 @@ class PostResource extends Resource
                         FileUpload::make('cover_image')
                             ->image()
                             ->imageEditor()
-                            ->directory('posts')
+                            ->directory('blogs')
                             ->disk('public')
                             ->visibility('public')
                             ->maxSize(4096)
@@ -99,7 +111,7 @@ class PostResource extends Resource
                             ->maxLength(500)
                             ->rows(4)
                             ->columnSpan(1)
-                            ->helperText('Short summary shown on cards. Written automatically if left blank when publishing.'),
+                            ->helperText('Short summary shown on cards. Written automatically if left blank.'),
                     ]),
 
                 Section::make('Content')
@@ -107,7 +119,7 @@ class PostResource extends Resource
                         RichEditor::make('content')
                             ->required()
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('posts/attachments')
+                            ->fileAttachmentsDirectory('blogs/attachments')
                             ->fileAttachmentsVisibility('public')
                             ->toolbarButtons([
                                 'bold',
@@ -146,6 +158,7 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('post_type', 'blog'))
             ->columns([
                 ImageColumn::make('cover_image')
                     ->rounded()
@@ -156,6 +169,7 @@ class PostResource extends Resource
                     ->weight('semibold')
                     ->limit(50),
                 TextColumn::make('category.name')
+                    ->label('Tag')
                     ->badge()
                     ->placeholder('—'),
                 TextColumn::make('author.name')
@@ -177,6 +191,7 @@ class PostResource extends Resource
                 SelectFilter::make('status')
                     ->options(Post::STATUSES),
                 SelectFilter::make('category')
+                    ->label('Tag')
                     ->relationship('category', 'name'),
             ])
             ->actions([
@@ -191,17 +206,27 @@ class PostResource extends Resource
             ->defaultSort('published_at', 'desc');
     }
 
+    public static function getRelations(): array
+    {
+        return [];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            'index' => Pages\ListBlogs::route('/'),
+            'create' => Pages\CreateBlog::route('/create'),
+            'edit' => Pages\EditBlog::route('/{record}/edit'),
         ];
     }
 
     public static function getGloballySearchableAttributes(): array
     {
         return ['title'];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('post_type', 'blog');
     }
 }

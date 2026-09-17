@@ -8,10 +8,12 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,11 +21,15 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 
 class PlayerResource extends Resource
@@ -55,6 +61,10 @@ class PlayerResource extends Resource
                         TextInput::make('slug')
                             ->unique(ignoreRecord: true)
                             ->maxLength(160),
+                        Select::make('sport')
+                            ->options(array_combine(Player::SPORTS, Player::SPORTS))
+                            ->searchable()
+                            ->native(false),
                         Select::make('position')
                             ->options(Player::POSITIONS)
                             ->required()
@@ -65,6 +75,11 @@ class PlayerResource extends Resource
                             ->maxValue(99),
                         TextInput::make('nationality')
                             ->maxLength(80),
+                        TextInput::make('city')
+                            ->maxLength(100),
+                        Select::make('level')
+                            ->options(array_combine(Player::LEVELS, Player::LEVELS))
+                            ->native(false),
                         Select::make('preferred_foot')
                             ->options(Player::FEET)
                             ->native(false),
@@ -83,11 +98,18 @@ class PlayerResource extends Resource
                             ->imagePreviewHeight('300')
                             ->helperText('Portrait image, ideally 800×1000px. Max 4MB.')
                             ->columnSpan(1),
-                        Grid::make(1)->schema([
-                            TextInput::make('short_description')
-                                ->maxLength(255)
-                                ->helperText('One-liner displayed on directory cards.'),
-                        ]),
+                        FileUpload::make('cover_image')
+                            ->image()
+                            ->imageEditor()
+                            ->directory('players/covers')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->maxSize(4096)
+                            ->helperText('Wide banner image for the player detail page. Max 4MB.'),
+                        TextInput::make('short_description')
+                            ->maxLength(255)
+                            ->helperText('One-liner displayed on directory cards.')
+                            ->columnSpanFull(),
                     ]),
 
                 Section::make('Biography')
@@ -147,7 +169,7 @@ class PlayerResource extends Resource
                             ->helperText('Goalkeepers only.'),
                     ]),
 
-                Section::make('Honours & social links')
+                Section::make('Honours, achievements & social links')
                     ->columns(2)
                     ->schema([
                         KeyValue::make('honours')
@@ -155,19 +177,64 @@ class PlayerResource extends Resource
                             ->valueLabel('Season & Note')
                             ->reorderable()
                             ->columnSpan(1),
+                        Repeater::make('achievements')
+                            ->schema([
+                                TextInput::make('title')->required(),
+                                TextInput::make('year'),
+                                TextInput::make('level'),
+                                Textarea::make('description')->rows(2),
+                            ])
+                            ->columns(2)
+                            ->reorderable()
+                            ->columnSpan(1),
                         KeyValue::make('social_links')
                             ->keyLabel('Platform')
                             ->valueLabel('URL')
                             ->reorderable()
                             ->columnSpan(1),
+                        Repeater::make('press_mentions')
+                            ->schema([
+                                TextInput::make('publication'),
+                                TextInput::make('link')->url(),
+                                TextInput::make('date'),
+                            ])
+                            ->columns(3)
+                            ->reorderable()
+                            ->columnSpan(1),
+                    ]),
+
+                Section::make('Media & video links')
+                    ->collapsed()
+                    ->columns(2)
+                    ->schema([
+                        Repeater::make('media')
+                            ->schema([
+                                TextInput::make('title'),
+                                TextInput::make('url')->url(),
+                                Select::make('type')
+                                    ->options(['video' => 'Video', 'photo' => 'Photo', 'article' => 'Article'])
+                                    ->native(false),
+                            ])
+                            ->columns(3)
+                            ->reorderable()
+                            ->columnSpan(1),
                     ]),
 
                 Section::make('Visibility')
-                    ->columns(2)
+                    ->columns(3)
                     ->schema([
                         Select::make('status')
                             ->options(Player::STATUSES)
                             ->default('draft')
+                            ->native(false)
+                            ->required(),
+                        Select::make('status_badge')
+                            ->options([
+                                'unverified' => 'Unverified',
+                                'verified' => 'Verified',
+                                'featured' => 'Featured',
+                            ])
+                            ->default('unverified')
                             ->native(false)
                             ->required(),
                         Toggle::make('is_featured')
@@ -187,6 +254,9 @@ class PlayerResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->weight('semibold'),
+                TextColumn::make('sport')
+                    ->badge()
+                    ->toggleable(),
                 TextColumn::make('position')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -201,6 +271,13 @@ class PlayerResource extends Resource
                     ->toggleable(),
                 TextColumn::make('current_club')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('status_badge')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'verified' => 'success',
+                        'featured' => 'primary',
+                        default => 'gray',
+                    }),
                 IconColumn::make('is_featured')
                     ->boolean()
                     ->label('Featured'),
@@ -215,15 +292,26 @@ class PlayerResource extends Resource
             ->filters([
                 SelectFilter::make('status')
                     ->options(Player::STATUSES),
+                SelectFilter::make('status_badge')
+                    ->options([
+                        'unverified' => 'Unverified',
+                        'verified' => 'Verified',
+                        'featured' => 'Featured',
+                    ]),
+                SelectFilter::make('sport')
+                    ->options(array_combine(Player::SPORTS, Player::SPORTS)),
                 SelectFilter::make('position')
                     ->options(Player::POSITIONS),
+                TrashedFilter::make(),
             ])
             ->actions([
                 EditAction::make(),
+                RestoreAction::make(),
                 DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
+                    RestoreBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ])

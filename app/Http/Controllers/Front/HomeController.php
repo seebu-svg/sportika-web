@@ -18,14 +18,15 @@ class HomeController extends Controller
             'settings' => $settings,
             'featuredPlayers' => Player::featured()->latest('updated_at')->take(4)->get(),
             'latestNews' => Post::published()
+                ->news()
                 ->with('category')
                 ->latest('published_at')
                 ->take(3)
                 ->get(),
             'latestBlogs' => Post::published()
+                ->blog()
                 ->with('category')
                 ->latest('published_at')
-                ->skip(3)
                 ->take(3)
                 ->get(),
             'stats' => [

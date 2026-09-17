@@ -19,7 +19,10 @@ class Post extends Model
 
     public const STATUSES = ['draft', 'published'];
 
+    public const TYPES = ['news', 'blog'];
+
     protected $fillable = [
+        'post_type',
         'category_id',
         'author_id',
         'title',
@@ -58,6 +61,16 @@ class Post extends Model
             ->where('status', 'published')
             ->whereNotNull('published_at')
             ->where('published_at', '<=', Carbon::now());
+    }
+
+    public function scopeNews(Builder $query): Builder
+    {
+        return $query->where('post_type', 'news');
+    }
+
+    public function scopeBlog(Builder $query): Builder
+    {
+        return $query->where('post_type', 'blog');
     }
 
     public function scopeFeatured(Builder $query): Builder

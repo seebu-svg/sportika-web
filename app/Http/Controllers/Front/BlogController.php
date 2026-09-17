@@ -14,6 +14,7 @@ class BlogController extends Controller
     public function index(Request $request): View
     {
         $posts = Post::published()
+            ->blog()
             ->with(['category', 'author'])
             ->when(
                 $request->filled('category'),
@@ -44,6 +45,7 @@ class BlogController extends Controller
     public function show(string $slug): View
     {
         $post = Post::where('slug', $slug)
+            ->where('post_type', 'blog')
             ->where('status', 'published')
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
@@ -52,6 +54,7 @@ class BlogController extends Controller
         $post->load(['category', 'author']);
 
         $related = Post::published()
+            ->blog()
             ->with('category')
             ->whereKeyNot($post->getKey())
             ->when(

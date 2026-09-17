@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->navigationGroups([
                 'Content',
+                'Applications',
                 'Community',
                 'Configuration',
             ])

@@ -13,6 +13,7 @@ class PostController extends Controller
     public function index(Request $request): View
     {
         $posts = Post::published()
+            ->news()
             ->with(['category', 'author'])
             ->when(
                 $request->filled('category'),
@@ -38,7 +39,7 @@ class PostController extends Controller
             'posts' => $posts,
             'featured' => $request->filled(['category', 'search'])
                 ? null
-                : Post::published()->with('category')->featured()->latest('published_at')->first(),
+                : Post::published()->news()->with('category')->featured()->latest('published_at')->first(),
             'categories' => Category::withPublishedPostCounts()->orderBy('name')->get(),
         ]);
     }
@@ -47,13 +48,17 @@ class PostController extends Controller
     {
         // Drafts and scheduled posts stay private on the public site.
         abort_unless(
-            $post->status === 'published' && $post->published_at !== null && $post->published_at->isPast(),
+            $post->status === 'published'
+            && $post->post_type === 'news'
+            && $post->published_at !== null
+            && $post->published_at->isPast(),
             404
         );
 
         $post->load(['category', 'author']);
 
         $related = Post::published()
+            ->news()
             ->with('category')
             ->whereKeyNot($post->getKey())
             ->when(
