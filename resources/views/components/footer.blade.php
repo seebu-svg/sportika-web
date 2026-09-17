@@ -12,7 +12,7 @@
 
 <footer class="border-t border-white/10 bg-pitch-900">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div class="grid gap-10 md:grid-cols-4">
+        <div class="grid gap-10 md:grid-cols-5">
             {{-- Brand --}}
             <div class="md:col-span-2">
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5">
@@ -38,15 +38,29 @@
                 @endif
             </div>
 
-            {{-- Quick links --}}
+            {{-- Explore --}}
             <div>
                 <h3 class="font-display text-lg tracking-wider text-white">Explore</h3>
                 <ul class="mt-4 space-y-2.5 text-sm">
-                    <li><a href="{{ route('home') }}" class="text-slate-400 transition hover:text-accent-300">Home</a></li>
-                    <li><a href="{{ route('about') }}" class="text-slate-400 transition hover:text-accent-300">About us</a></li>
-                    <li><a href="{{ route('players.index') }}" class="text-slate-400 transition hover:text-accent-300">Players directory</a></li>
-                    <li><a href="{{ route('posts.index') }}" class="text-slate-400 transition hover:text-accent-300">News & blogs</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-slate-400 transition hover:text-accent-300">Contact us</a></li>
+                    <li><a href="{{ route('about') }}" class="text-slate-400 transition hover:text-accent-300">About Us</a></li>
+                    <li><a href="{{ route('team') }}" class="text-slate-400 transition hover:text-accent-300">Team</a></li>
+                    <li><a href="{{ route('players.index') }}" class="text-slate-400 transition hover:text-accent-300">Players</a></li>
+                    <li><a href="{{ route('tournaments.index') }}" class="text-slate-400 transition hover:text-accent-300">Tournaments</a></li>
+                    <li><a href="{{ route('gallery') }}" class="text-slate-400 transition hover:text-accent-300">Champions Gallery</a></li>
+                    <li><a href="{{ route('sponsors') }}" class="text-slate-400 transition hover:text-accent-300">Sponsors</a></li>
+                </ul>
+            </div>
+
+            {{-- Media & Membership --}}
+            <div>
+                <h3 class="font-display text-lg tracking-wider text-white">Media</h3>
+                <ul class="mt-4 space-y-2.5 text-sm">
+                    <li><a href="{{ route('posts.index') }}" class="text-slate-400 transition hover:text-accent-300">News</a></li>
+                    <li><a href="{{ route('blogs.index') }}" class="text-slate-400 transition hover:text-accent-300">Blogs</a></li>
+                    <li><a href="{{ route('podcast') }}" class="text-slate-400 transition hover:text-accent-300">Podcast</a></li>
+                    <li><a href="{{ route('membership.player') }}" class="text-slate-400 transition hover:text-accent-300">Join as Player</a></li>
+                    <li><a href="{{ route('membership.brand') }}" class="text-slate-400 transition hover:text-accent-300">Join as Brand</a></li>
+                    <li><a href="{{ route('faq') }}" class="text-slate-400 transition hover:text-accent-300">FAQs</a></li>
                 </ul>
             </div>
 
@@ -63,13 +77,17 @@
                     @if ($footerSettings->address)
                         <li>{{ $footerSettings->address }}</li>
                     @endif
+                    <li class="pt-1"><a href="{{ route('contact') }}" class="text-accent-400 transition hover:text-accent-300">Contact form &rarr;</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
             <p>&copy; {{ date('Y') }} {{ $footerSettings->site_name }}. All rights reserved.</p>
-            <p>Powered by Laravel &amp; Filament</p>
+            <div class="flex gap-4">
+                <a href="{{ route('privacy') }}" class="transition hover:text-slate-300">Privacy Policy</a>
+                <a href="{{ route('terms') }}" class="transition hover:text-slate-300">Terms of Service</a>
+            </div>
         </div>
     </div>
 </footer>
