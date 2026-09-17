@@ -1,0 +1,37 @@
+@props(['post'])
+
+<article class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-pitch-800 transition duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-xl hover:shadow-accent-400/5">
+    <a href="{{ route('posts.show', $post->slug) }}" class="relative block aspect-video overflow-hidden">
+        <img
+            src="{{ $post->cover_url ?? asset('images/post-fallback.svg') }}"
+            alt="{{ $post->title }}"
+            loading="lazy"
+            class="size-full object-cover transition duration-500 group-hover:scale-105"
+        >
+        @if ($post->category)
+            <span class="absolute left-3 top-3 rounded-full bg-accent-400 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-pitch-950">
+                {{ $post->category->name }}
+            </span>
+        @endif
+    </a>
+
+    <div class="flex flex-1 flex-col p-5">
+        <p class="text-xs text-slate-500">
+            {{ $post->published_at?->translatedFormat('d M Y') ?? now()->translatedFormat('d M Y') }}
+            &middot; {{ $post->reading_time }} min read
+        </p>
+
+        <h3 class="mt-2 text-lg font-semibold leading-snug text-white transition group-hover:text-accent-300">
+            <a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
+        </h3>
+
+        <p class="mt-2 line-clamp-3 text-sm text-slate-400">
+            {{ $post->excerpt }}
+        </p>
+
+        <span class="mt-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-accent-400">
+            Read article
+            <span class="transition group-hover:translate-x-0.5">→</span>
+        </span>
+    </div>
+</article>

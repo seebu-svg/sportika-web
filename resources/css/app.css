@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    /* Brand palette — deep pitch navy with electric lime highlights */
+    --color-pitch-950: #05070c;
+    --color-pitch-900: #0a0f1a;
+    --color-pitch-800: #101a2e;
+    --color-pitch-700: #1a2740;
+    --color-pitch-600: #27395c;
+
+    --color-accent-200: #ecfccb;
+    --color-accent-300: #d9f99d;
+    --color-accent-400: #a3e635;
+    --color-accent-500: #84cc16;
+    --color-accent-600: #65a30d;
+
+    --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* ---- Base ---- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-pitch-950 font-sans text-slate-300 antialiased;
+}
+
+::selection {
+    @apply bg-accent-400 text-pitch-950;
+}
+
+/* Sporty diagonal section separators */
+.bg-diagonal {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgb(163 230 53 / 0.06) 0px,
+        rgb(163 230 53 / 0.06) 2px,
+        transparent 2px,
+        transparent 14px
+    );
+}
+
+/* ---- Rich text (admin-managed content) ---- */
+
+.rich-content {
+    @apply text-slate-300/90;
+}
+
+.rich-content > * + * {
+    margin-top: 1.25rem;
+}
+
+.rich-content h2 {
+    @apply font-display text-3xl tracking-wide text-white uppercase;
+}
+
+.rich-content h3 {
+    @apply text-xl font-semibold text-white;
+}
+
+.rich-content strong {
+    @apply text-white;
+}
+
+.rich-content a {
+    @apply text-accent-400 underline decoration-accent-400/40 underline-offset-4 hover:text-accent-300;
+}
+
+.rich-content ul {
+    @apply list-disc space-y-2 pl-6;
+}
+
+.rich-content ol {
+    @apply list-decimal space-y-2 pl-6;
+}
+
+.rich-content blockquote {
+    @apply border-l-2 border-accent-400 pl-4 text-slate-200 italic;
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2740"/>
+      <stop offset="100%" stop-color="#0a0f1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#g)"/>
+  <circle cx="200" cy="180" r="60" fill="#27395c" opacity="0.5"/>
+  <path d="M 140 280 Q 200 240 260 280 L 260 500 L 140 500 Z" fill="#27395c" opacity="0.5"/>
+  <text x="200" y="450" font-family="Arial, sans-serif" font-size="14" fill="#64748b" text-anchor="middle">No photo available</text>
+</svg>
