@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasSlug;
+use App\Models\Concerns\ResolvesImageUrls;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Support\Carbon;
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory, HasSlug, SoftDeletes;
+    use HasFactory, HasSlug, SoftDeletes, ResolvesImageUrls;
 
     protected static string $slugSource = 'title';
 
@@ -80,9 +81,7 @@ class Post extends Model
 
     public function getCoverUrlAttribute(): ?string
     {
-        return $this->cover_image
-            ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_image)
-            : null;
+        return $this->resolveImageUrl($this->cover_image);
     }
 
     public function getReadingTimeAttribute(): int

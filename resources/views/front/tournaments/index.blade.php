@@ -40,16 +40,19 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" x-data="revealOnScroll">
         @if ($tournaments->isEmpty())
-            <div class="rounded-2xl border border-dashed border-white/15 bg-accent-600 px-6 py-20 text-center">
-                <p class="font-display text-3xl tracking-wide text-white">No tournaments yet</p>
-                <p class="mt-2 text-gray-400">Tournament listings are being prepared. Check back soon for upcoming competitions.</p>
+            <div class="card-shadow rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-20 text-center">
+                <div class="mx-auto mb-5 grid size-16 place-items-center rounded-full bg-accent-500/10 text-accent-500">
+                    <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9 9 0 0 1 0-18h9M16.5 18.75V6.75m0 12h-9m9-12a2.25 2.25 0 0 1 2.25 2.25v4.5a2.25 2.25 0 0 1-2.25 2.25m-9-9a2.25 2.25 0 0 0-2.25 2.25v4.5a2.25 2.25 0 0 0 2.25 2.25" /></svg>
+                </div>
+                <p class="font-display text-3xl tracking-wide text-black">No Tournaments Yet</p>
+                <p class="mt-2 text-gray-500">Tournament listings are being prepared. Check back soon for upcoming competitions.</p>
             </div>
         @else
-            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" x-reveal>
                 @foreach ($tournaments as $tournament)
-                    <a href="{{ route('tournaments.show', $tournament->slug) }}" class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-accent-400">
+                    <a href="{{ route('tournaments.show', $tournament->slug) }}" class="card-shadow group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-accent-400">
                         <div class="bg-diagonal absolute inset-0 opacity-30"></div>
                         <div class="relative">
                             @php
@@ -65,7 +68,7 @@
                             @if ($tournament->sport)
                                 <span class="ml-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">{{ $tournament->sport }}</span>
                             @endif
-                            <h3 class="mt-4 font-display text-xl uppercase tracking-wide text-white">{{ $tournament->name }}</h3>
+                            <h3 class="mt-4 font-display text-xl uppercase tracking-wide text-black">{{ $tournament->name }}</h3>
                             <div class="mt-4 space-y-2 text-sm text-gray-400">
                                 @if ($tournament->start_date)
                                     <p class="flex items-center gap-2">

@@ -20,9 +20,9 @@
     </section>
 
     {{-- ========================== OUR STORY ============================ --}}
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" x-data="revealOnScroll">
         <div class="grid gap-12 lg:grid-cols-2">
-            <div>
+            <div x-reveal>
                 <img src="{{ asset('images/wolf-logo.png') }}" alt="Sportika" class="mb-8 w-40 opacity-85 drop-shadow-lg">
                 <p class="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-accent-500">Our Story</p>
                 <h2 class="font-display text-4xl uppercase tracking-wide text-black sm:text-5xl">
@@ -37,20 +37,20 @@
                     @endif
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="rounded-2xl border border-gray-200 bg-white p-7">
+            <div class="grid grid-cols-2 gap-4" x-reveal="right">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7">
                     <p class="font-display text-5xl text-accent-500">{{ $playerCount }}</p>
                     <p class="mt-1 text-sm text-gray-400">Players represented</p>
                 </div>
-                <div class="rounded-2xl border border-gray-200 bg-white p-7 mt-6">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7 mt-6">
                     <p class="font-display text-5xl text-accent-500">{{ $postCount }}</p>
                     <p class="mt-1 text-sm text-gray-400">News articles published</p>
                 </div>
-                <div class="rounded-2xl border border-gray-200 bg-white p-7">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7">
                     <p class="font-display text-5xl text-accent-500">24</p>
                     <p class="mt-1 text-sm text-gray-400">Tournaments organized</p>
                 </div>
-                <div class="rounded-2xl border border-gray-200 bg-white p-7 mt-6">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7 mt-6">
                     <p class="font-display text-5xl text-accent-500">15+</p>
                     <p class="mt-1 text-sm text-gray-400">Years of experience</p>
                 </div>
@@ -59,10 +59,10 @@
     </section>
 
     {{-- ======================== MISSION & VISION ======================== --}}
-    <section class="border-y border-gray-200 bg-accent-600/50">
+    <section class="border-y border-gray-200 bg-pitch-100">
         <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div class="grid gap-8 md:grid-cols-2">
-                <div class="rounded-2xl border border-gray-200 bg-white p-8">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-8">
                     <div class="mb-4 grid size-12 place-items-center rounded-xl bg-accent-500/15 text-accent-500">
                         <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
                     </div>
@@ -71,7 +71,7 @@
                         To discover, develop and represent exceptional athletic talent — providing world-class management, strategic career guidance and brand partnership opportunities that allow our players to focus on what they do best: perform at the highest level.
                     </p>
                 </div>
-                <div class="rounded-2xl border border-gray-200 bg-white p-8">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-8">
                     <div class="mb-4 grid size-12 place-items-center rounded-xl bg-accent-500/15 text-accent-500">
                         <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
                     </div>
@@ -110,14 +110,14 @@
 
     {{-- ======================== MEET THE TEAM ========================== --}}
     @if ($teamMembers->isNotEmpty())
-        <section class="border-t border-gray-200 bg-accent-600/50">
+        <section class="border-t border-gray-200 bg-pitch-100">
             <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
                 <x-section-heading eyebrow="The people behind Sportika" title="Our Team" :align="'center'" :inverted="true" />
                 <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach ($teamMembers as $member)
-                        <a href="{{ route('team.show', $member->slug) }}" class="group rounded-2xl border border-gray-200 bg-white p-6 text-center transition hover:-translate-y-1 hover:border-accent-400">
+                        <a href="{{ route('team.show', $member->slug) }}" class="card-shadow group rounded-2xl border border-gray-200 bg-white p-6 text-center transition hover:-translate-y-1 hover:border-accent-400">
                             <div class="mx-auto mb-4 size-24 overflow-hidden rounded-full border-2 border-accent-400/20 bg-gray-700">
-                                <img src="{{ $member->photo_url ?? asset('images/player-fallback.svg') }}" alt="{{ $member->name }}" class="size-full object-cover">
+                                <img src="{{ $member->photo_url ?? asset('images/player-fallback.svg') }}" alt="{{ $member->name }}" loading="lazy" class="size-full object-cover">
                             </div>
                             <h4 class="font-display text-xl tracking-wide text-black">{{ $member->name }}</h4>
                             <p class="mt-1 text-sm text-accent-500">{{ $member->designation }}</p>

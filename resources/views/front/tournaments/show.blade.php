@@ -41,9 +41,9 @@
 
     {{-- Fixtures --}}
     @if (! empty($tournament->fixtures))
-        <section class="border-y border-gray-200 bg-accent-600/50">
+        <section class="border-y border-gray-200 bg-pitch-100">
             <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-                <x-section-heading eyebrow="Schedule" title="Fixtures & Schedule" :inverted="true" />
+                <x-section-heading eyebrow="Schedule" title="Fixtures & Schedule" />
                 <div class="space-y-3">
                     @foreach ($tournament->fixtures as $fixture)
                         <div class="flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-4">
@@ -76,9 +76,9 @@
 
     {{-- Participating players --}}
     @if ($players->isNotEmpty())
-        <section class="border-y border-gray-200 bg-accent-600/50">
+        <section class="border-y border-gray-200 bg-pitch-100">
             <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-                <x-section-heading eyebrow="The competitors" title="Participating Players" :inverted="true" />
+                <x-section-heading eyebrow="The competitors" title="Participating Players" />
                 <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach ($players as $player)
                         <x-player-card :player="$player" />
@@ -95,7 +95,7 @@
             <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
                 @foreach ($tournament->gallery as $image)
                     <div class="aspect-square overflow-hidden rounded-2xl border border-gray-200 bg-white">
-                        <img src="{{ is_string($image) ? $image : ($image['url'] ?? '') }}" alt="" class="size-full object-cover">
+                        <img src="{{ is_string($image) ? $image : ($image['url'] ?? '') }}" alt="" loading="lazy" class="size-full object-cover">
                     </div>
                 @endforeach
             </div>

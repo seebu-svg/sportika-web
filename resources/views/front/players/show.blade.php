@@ -119,7 +119,7 @@
                 ]);
             @endphp
             @foreach ($vitals as $vital)
-                <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-5">
                     <p class="text-xs uppercase tracking-wider text-gray-400">{{ $vital['label'] }}</p>
                     <p class="mt-1 font-display text-2xl text-black">{{ $vital['value'] }}</p>
                 </div>
@@ -153,7 +153,7 @@
             <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 @if (! empty($player->achievements))
                     @foreach ($player->achievements as $achievement)
-                        <li class="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5">
+                        <li class="card-shadow flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5">
                             <span class="grid size-10 shrink-0 place-items-center rounded-full bg-accent-500/15 text-accent-500">
                                 <svg class="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 9.2 8.6 2 9.3l5.5 4.8L5.8 22 12 18.3 18.2 22l-1.7-7.9L22 9.3l-7.2-.7z"/></svg>
                             </span>
@@ -171,7 +171,7 @@
                 @endif
                 @if (! empty($player->honours))
                     @foreach ($player->honours as $award => $season)
-                        <li class="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5">
+                        <li class="card-shadow flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5">
                             <span class="grid size-10 shrink-0 place-items-center rounded-full bg-accent-500/15 text-accent-500">
                                 <svg class="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 9.2 8.6 2 9.3l5.5 4.8L5.8 22 12 18.3 18.2 22l-1.7-7.9L22 9.3l-7.2-.7z"/></svg>
                             </span>
@@ -188,9 +188,9 @@
 
     {{-- ============================ MEDIA & NEWS ========================= --}}
     @if (! empty($player->media) || ! empty($player->press_mentions))
-        <section class="border-y border-gray-200 bg-accent-600/50">
+        <section class="border-y border-gray-200 bg-pitch-100">
             <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-                <x-section-heading eyebrow="In the spotlight" title="Media & News" :inverted="true" />
+                <x-section-heading eyebrow="In the spotlight" title="Media & News" />
 
                 @if (! empty($player->media))
                     <div class="mb-8">
@@ -245,8 +245,8 @@
     {{-- ============================= SOCIALS ============================= --}}
     @if (! empty($player->social_links))
         <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <div class="rounded-2xl border border-gray-200 bg-white p-6">
-                <h3 class="font-display text-xl tracking-wider text-white">Follow {{ $player->name }}</h3>
+            <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-6">
+                <h3 class="font-display text-xl tracking-wider text-black">Follow {{ $player->name }}</h3>
                 <div class="mt-4 flex flex-wrap gap-2">
                     @foreach ($player->social_links as $platform => $url)
                         <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-accent-400 hover:text-accent-400">
@@ -263,7 +263,7 @@
         <div class="rounded-2xl border border-accent-400/20 bg-white p-6">
             <div class="flex flex-wrap items-center justify-between gap-6">
                 <div>
-                    <h3 class="font-display text-xl tracking-wider text-white">Share this profile</h3>
+                    <h3 class="font-display text-xl tracking-wider text-black">Share this profile</h3>
                     <div class="mt-3 flex flex-wrap gap-2">
                         <a href="https://wa.me/?text={{ urlencode($player->name.' — Player Profile '.route('players.show', $player->slug)) }}" target="_blank" rel="noopener" class="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-green-500/50 hover:text-green-400">
                             WhatsApp

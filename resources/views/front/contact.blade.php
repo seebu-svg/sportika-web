@@ -122,8 +122,8 @@
 
             {{-- ============================ Sidebar ============================ --}}
             <aside class="space-y-6 lg:col-span-2">
-                <div class="rounded-2xl border border-gray-200 bg-white p-6">
-                    <h3 class="font-display text-xl tracking-wider text-white">Reach us directly</h3>
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-6">
+                    <h3 class="font-display text-xl tracking-wider text-black">Reach us directly</h3>
                     <ul class="mt-4 space-y-4 text-sm text-gray-400">
                         @if ($settings->email)
                             <li class="flex items-start gap-3">
@@ -161,16 +161,16 @@
                     </ul>
                 </div>
 
-                <div class="rounded-2xl border border-accent-200 bg-white p-6">
-                    <h3 class="font-display text-xl tracking-wider text-white">Response time</h3>
+                <div class="card-shadow rounded-2xl border border-accent-200 bg-white p-6">
+                    <h3 class="font-display text-xl tracking-wider text-black">Response time</h3>
                     <p class="mt-3 text-sm leading-relaxed text-gray-400">
                         We typically respond within <strong class="text-black">24 hours</strong> on business days. Urgent enquiries about active transfers should include <strong class="text-accent-400">"URGENT"</strong> in the subject line.
                     </p>
                 </div>
 
                 {{-- Social media links --}}
-                <div class="rounded-2xl border border-gray-200 bg-white p-6">
-                    <h3 class="font-display text-xl tracking-wider text-white">Follow us</h3>
+                <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-6">
+                    <h3 class="font-display text-xl tracking-wider text-black">Follow us</h3>
                     <p class="mt-2 text-sm text-gray-400">Stay connected on social media for the latest updates, highlights, and behind-the-scenes content.</p>
                     <div class="mt-4 flex flex-wrap gap-2">
                         @if ($settings->facebook_url)

@@ -17,7 +17,7 @@
             <div class="grid items-start gap-10 lg:grid-cols-3">
                 <div class="lg:col-span-1">
                     <div class="mx-auto aspect-[3/4] max-w-sm overflow-hidden rounded-3xl border border-gray-200 bg-white">
-                        <img src="{{ $member->photo_url ?? asset('images/player-fallback.svg') }}" alt="{{ $member->name }}" class="size-full object-cover">
+                        <img src="{{ $member->photo_url ?? asset('images/player-fallback.svg') }}" alt="{{ $member->name }}" loading="lazy" class="size-full object-cover">
                     </div>
                 </div>
                 <div class="lg:col-span-2">

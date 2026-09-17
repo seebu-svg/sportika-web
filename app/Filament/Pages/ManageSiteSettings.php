@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\SiteSetting;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -49,6 +50,24 @@ class ManageSiteSettings extends Page
                         TextInput::make('tagline')
                             ->maxLength(120)
                             ->columnSpan(1),
+                        FileUpload::make('logo')
+                            ->image()
+                            ->imageEditor()
+                            ->directory('site')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->maxSize(2048)
+                            ->helperText('Site logo, used in the header. Max 2MB.')
+                            ->columnSpan(1),
+                        FileUpload::make('hero_image')
+                            ->image()
+                            ->imageEditor()
+                            ->directory('site')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->maxSize(4096)
+                            ->helperText('Hero banner background, ideally 1920×1080px. Max 4MB.')
+                            ->columnSpan(1),
                         TextInput::make('hero_title')
                             ->maxLength(120)
                             ->columnSpan(2),
@@ -62,6 +81,14 @@ class ManageSiteSettings extends Page
                     ->schema([
                         TextInput::make('about_title')
                             ->maxLength(120),
+                        FileUpload::make('about_image')
+                            ->image()
+                            ->imageEditor()
+                            ->directory('site')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->maxSize(4096)
+                            ->helperText('Image shown on the about page or home page intro. Max 4MB.'),
                         RichEditor::make('about_body')
                             ->toolbarButtons(['bold', 'italic', 'h2', 'h3', 'bulletList', 'orderedList', 'link', 'undo', 'redo'])
                             ->columnSpanFull(),

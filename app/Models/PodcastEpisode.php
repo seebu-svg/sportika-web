@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasSlug;
+use App\Models\Concerns\ResolvesImageUrls;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PodcastEpisode extends Model
 {
-    use HasSlug;
+    use HasSlug, ResolvesImageUrls;
 
     protected static string $slugSource = 'title';
 
@@ -33,7 +34,7 @@ class PodcastEpisode extends Model
 
     public function getThumbnailUrlAttribute(): ?string
     {
-        return $this->thumbnail ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->thumbnail) : null;
+        return $this->resolveImageUrl($this->thumbnail);
     }
 
     public function scopePublished($query)

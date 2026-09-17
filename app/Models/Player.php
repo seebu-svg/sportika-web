@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasSlug;
+use App\Models\Concerns\ResolvesImageUrls;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Player extends Model
 {
     /** @use HasFactory<\Database\Factories\PlayerFactory> */
-    use HasFactory, HasSlug, SoftDeletes;
+    use HasFactory, HasSlug, SoftDeletes, ResolvesImageUrls;
 
     protected static string $slugSource = 'name';
 
@@ -100,12 +101,12 @@ class Player extends Model
 
     public function getPhotoUrlAttribute(): ?string
     {
-        return $this->photo ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->photo) : null;
+        return $this->resolveImageUrl($this->photo);
     }
 
     public function getCoverImageUrlAttribute(): ?string
     {
-        return $this->cover_image ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_image) : null;
+        return $this->resolveImageUrl($this->cover_image);
     }
 
     public function getAgeAttribute(): ?int

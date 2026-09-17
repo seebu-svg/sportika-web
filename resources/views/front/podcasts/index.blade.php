@@ -33,7 +33,7 @@
                     <div class="group overflow-hidden rounded-2xl border border-gray-200 bg-white transition hover:-translate-y-1 hover:border-accent-400">
                         <div class="relative aspect-video overflow-hidden">
                             @if ($episode->thumbnail_url)
-                                <img src="{{ $episode->thumbnail_url }}" alt="{{ $episode->title }}" class="size-full object-cover transition duration-500 group-hover:scale-105">
+                                <img src="{{ $episode->thumbnail_url }}" alt="{{ $episode->title }}" loading="lazy" class="size-full object-cover transition duration-500 group-hover:scale-105">
                             @else
                                 <div class="bg-diagonal absolute inset-0"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">

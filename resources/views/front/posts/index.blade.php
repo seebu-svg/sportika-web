@@ -62,7 +62,7 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" x-data="revealOnScroll">
         {{-- Featured post --}}
         @if ($featured)
             <a href="{{ route('posts.show', $featured->slug) }}" class="group mb-10 grid overflow-hidden rounded-3xl border border-gray-200 bg-white transition hover:border-accent-400 md:grid-cols-2">
@@ -93,12 +93,15 @@
         @endif
 
         @if ($posts->isEmpty())
-            <div class="rounded-2xl border border-dashed border-white/15 bg-accent-600 px-6 py-20 text-center">
-                <p class="font-display text-3xl tracking-wide text-white">No articles yet</p>
-                <p class="mt-2 text-gray-400">Check back soon — the newsroom is warming up.</p>
+            <div class="card-shadow rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-20 text-center">
+                <div class="mx-auto mb-5 grid size-16 place-items-center rounded-full bg-accent-500/10 text-accent-500">
+                    <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" /></svg>
+                </div>
+                <p class="font-display text-3xl tracking-wide text-black">No Articles Yet</p>
+                <p class="mt-2 text-gray-500">Check back soon — the newsroom is warming up.</p>
             </div>
         @else
-            <div class="grid gap-6 md:grid-cols-3">
+            <div class="grid gap-6 md:grid-cols-3" x-reveal>
                 @foreach ($posts as $post)
                     <x-post-card :post="$post" />
                 @endforeach

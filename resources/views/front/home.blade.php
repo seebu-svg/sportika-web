@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- ============================== 1. HERO ============================== --}}
-    <section class="relative flex min-h-[92vh] items-center overflow-hidden bg-accent-600">
+    <section class="hero-shimmer relative flex min-h-[92vh] items-center overflow-hidden bg-accent-600">
         {{-- Hero banner background --}}
         <div class="absolute inset-0">
             <img src="{{ asset('images/hero-banner.png') }}" alt="" class="size-full object-cover">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
+            <div class="hero-animate max-w-3xl">
                 <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-blue-100">
                     <span class="inline-block size-2 rounded-full bg-white animate-pulse"></span>
                     Player Management Agency
@@ -25,10 +25,10 @@
                     {{ $settings->hero_subtitle ?? 'Discover our squad of exceptional athletes, follow the latest news, and get in touch with our team.' }}
                 </p>
                 <div class="mt-10 flex flex-wrap gap-4">
-                    <a href="{{ route('players.index') }}" class="rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-accent-500 transition hover:bg-blue-50">
+                    <a href="{{ route('players.index') }}" class="btn-tactile rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-accent-500 transition hover:bg-blue-50">
                         Explore Players
                     </a>
-                    <a href="{{ route('membership.player') }}" class="rounded-full border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/10">
+                    <a href="{{ route('membership.player') }}" class="btn-tactile rounded-full border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/10">
                         Join the Platform
                     </a>
                 </div>
@@ -45,9 +45,9 @@
     </section>
 
     {{-- ========================= 2. BRAND INTRODUCTION ========================= --}}
-    <section class="border-b border-gray-200 bg-white">
+    <section class="border-b border-gray-200 bg-white" x-data="revealOnScroll">
         <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8">
-            <div>
+            <div x-reveal>
                 <x-section-heading
                     eyebrow="Who we are"
                     title="{{ $settings->about_title ?? 'Built for the Beautiful Game' }}"
@@ -57,28 +57,28 @@
                 </div>
                 <a
                     href="{{ route('about') }}"
-                    class="mt-8 inline-block rounded-full bg-accent-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-accent-600"
+                    class="btn-tactile mt-8 inline-block rounded-full bg-accent-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-accent-600"
                 >
                     Our Story &rarr;
                 </a>
             </div>
 
-            <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center justify-center" x-reveal="right">
                 <img src="{{ asset('images/wolf-logo.png') }}" alt="Sportika" class="mb-8 w-48 opacity-90 drop-shadow-lg sm:w-56">
                 <div class="grid w-full grid-cols-2 gap-4">
-                    <div class="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
+                    <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7">
                         <p class="font-display text-5xl text-accent-500">{{ $stats['players'] }}</p>
                         <p class="mt-1 text-sm text-gray-500">Players represented</p>
                     </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-7 mt-6 shadow-sm">
+                    <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7 mt-6">
                         <p class="font-display text-5xl text-accent-500">{{ $stats['countries'] }}</p>
                         <p class="mt-1 text-sm text-gray-500">Countries</p>
                     </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
+                    <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7">
                         <p class="font-display text-5xl text-accent-500">{{ $stats['tournaments'] }}</p>
                         <p class="mt-1 text-sm text-gray-500">Tournaments</p>
                     </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-7 mt-6 shadow-sm">
+                    <div class="card-shadow rounded-2xl border border-gray-200 bg-white p-7 mt-6">
                         <p class="font-display text-5xl text-accent-500">{{ $stats['years'] }}+</p>
                     <p class="mt-1 text-sm text-gray-500">Years of experience</p>
                 </div>
@@ -88,14 +88,14 @@
 
     {{-- ============================== 3. NEWS PREVIEW ============================== --}}
     @if ($latestNews->isNotEmpty())
-        <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" x-data="revealOnScroll">
             <div class="flex flex-wrap items-end justify-between gap-4">
                 <x-section-heading eyebrow="Latest updates" title="News" />
                 <a href="{{ route('posts.index') }}" class="mb-10 text-sm font-bold uppercase tracking-wider text-accent-500 transition hover:text-accent-400">
                     View All →
                 </a>
             </div>
-            <div class="grid gap-6 md:grid-cols-3">
+            <div class="grid gap-6 md:grid-cols-3" x-reveal>
                 @foreach ($latestNews as $post)
                     <x-post-card :post="$post" />
                 @endforeach
@@ -105,7 +105,7 @@
 
     {{-- ============================== 4. BLOGS PREVIEW ============================== --}}
     @if ($latestBlogs->isNotEmpty())
-        <section class="border-y border-gray-200 bg-white">
+        <section class="border-y border-gray-200 bg-white" x-data="revealOnScroll">
             <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
                 <div class="flex flex-wrap items-end justify-between gap-4">
                     <x-section-heading eyebrow="Insights & opinion" title="From the Blog" />
@@ -113,7 +113,7 @@
                         View All →
                     </a>
                 </div>
-                <div class="grid gap-6 md:grid-cols-3">
+                <div class="grid gap-6 md:grid-cols-3" x-reveal>
                     @foreach ($latestBlogs as $post)
                         <x-post-card :post="$post" />
                     @endforeach
@@ -123,7 +123,7 @@
     @endif
 
     {{-- ========================= 5. FEATURED TOURNAMENTS ========================= --}}
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" x-data="revealOnScroll">
         <div class="flex flex-wrap items-end justify-between gap-4">
             <x-section-heading
                 eyebrow="Competitions"
@@ -140,7 +140,7 @@
                 ['name' => 'International Champions Trophy', 'date' => 'Sep 20 – Oct 8, 2026', 'location' => 'Madrid, Spain', 'status' => 'Upcoming'],
                 ['name' => 'Pre-Season Invitational', 'date' => 'Aug 15 – Aug 28, 2026', 'location' => 'Munich, Germany', 'status' => 'Completed'],
             ] as $tournament)
-                <a href="{{ route('tournaments.index') }}" class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-accent-400">
+                <a href="{{ route('tournaments.index') }}" class="card-shadow group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-accent-400">
                     <div class="bg-diagonal absolute inset-0 opacity-30"></div>
                     <div class="relative">
                         <span class="inline-block rounded-full bg-accent-500/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-500">
@@ -164,7 +164,7 @@
     </section>
 
     {{-- ========================= 6. HIGHLIGHT VIDEOS / REEL ========================= --}}
-    <section class="border-y border-gray-200 bg-accent-600">
+    <section class="border-y border-gray-200 bg-accent-600" x-data="revealOnScroll">
         <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <x-section-heading
                 eyebrow="Watch"
@@ -192,14 +192,14 @@
 
     {{-- ========================= 7. FEATURED PLAYERS ========================= --}}
     @if ($featuredPlayers->isNotEmpty())
-        <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" x-data="revealOnScroll">
             <div class="flex flex-wrap items-end justify-between gap-4">
                 <x-section-heading eyebrow="The squad" title="Featured Players" />
                 <a href="{{ route('players.index') }}" class="mb-10 text-sm font-bold uppercase tracking-wider text-accent-500 transition hover:text-accent-400">
                     View All →
                 </a>
             </div>
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" x-reveal>
                 @foreach ($featuredPlayers as $player)
                     <x-player-card :player="$player" />
                 @endforeach
@@ -208,7 +208,7 @@
     @endif
 
     {{-- ========================= 8. CHAMPIONS GALLERY PREVIEW ========================= --}}
-    <section class="border-y border-gray-200 bg-white">
+    <section class="border-y border-gray-200 bg-white" x-data="revealOnScroll">
         <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div class="flex flex-wrap items-end justify-between gap-4">
                 <x-section-heading eyebrow="Moments of glory" title="Champions Gallery" />
@@ -232,7 +232,7 @@
     </section>
 
     {{-- ============================== 9. STATS COUNTER ============================== --}}
-    <section class="relative overflow-hidden">
+    <section class="relative overflow-hidden" x-data="revealOnScroll">
         <div class="bg-diagonal absolute inset-0"></div>
         <div class="absolute -top-20 left-1/2 size-80 -translate-x-1/2 rounded-full bg-accent-500/5 blur-3xl"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
@@ -249,7 +249,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="{{ $stat['icon'] }}" />
                             </svg>
                         </div>
-                        <p class="font-display text-5xl text-accent-500 sm:text-6xl">{{ $stat['value'] }}</p>
+                        <p class="font-display text-5xl text-accent-500 sm:text-6xl" x-data="countUp" data-count="{{ preg_replace('/[^0-9]/', '', $stat['value']) }}" data-suffix="{{ str_contains($stat['value'], '+') ? '+' : '' }}">{{ $stat['value'] }}</p>
                         <p class="mt-2 text-sm uppercase tracking-wider text-gray-500">{{ $stat['label'] }}</p>
                     </div>
                 @endforeach
@@ -277,7 +277,7 @@
     </section>
 
     {{-- ============================== 11. CTA ============================== --}}
-    <section class="bg-white">
+    <section class="bg-white" x-data="revealOnScroll">
         <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div class="relative overflow-hidden rounded-3xl border border-accent-200 bg-gradient-to-br from-accent-500 to-accent-600 px-8 py-16 text-center sm:px-16">
                 <div class="bg-diagonal absolute inset-0"></div>
@@ -289,22 +289,22 @@
                     <p class="mx-auto mt-4 max-w-xl text-lg text-blue-100">
                         Whether you are a player seeking representation or a brand looking to connect with talent — our door is open.
                     </p>
-                    <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <div class="mt-10 flex flex-wrap justify-center gap-4" x-reveal>
                         <a
                             href="{{ route('players.index') }}"
-                            class="rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-accent-500 transition hover:bg-blue-50"
+                            class="btn-tactile rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-accent-500 transition hover:bg-blue-50"
                         >
                             Explore Players
                         </a>
                         <a
                             href="{{ route('membership.player') }}"
-                            class="rounded-full border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/10"
+                            class="btn-tactile rounded-full border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/10"
                         >
                             Join as Player
                         </a>
                         <a
                             href="{{ route('membership.brand') }}"
-                            class="rounded-full border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/10"
+                            class="btn-tactile rounded-full border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-white/10"
                         >
                             Join as Brand
                         </a>

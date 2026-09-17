@@ -1,6 +1,6 @@
 @props(['post'])
 
-<article class="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-accent-400 hover:shadow-lg hover:shadow-accent-500/10">
+<article class="card-shadow group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-accent-400">
     <a href="{{ route('posts.show', $post->slug) }}" class="relative block aspect-video overflow-hidden">
         <img
             src="{{ $post->cover_url ?? asset('images/post-fallback.svg') }}"

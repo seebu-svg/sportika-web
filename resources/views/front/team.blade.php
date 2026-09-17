@@ -18,19 +18,22 @@
     </section>
 
     {{-- Team grid --}}
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8" x-data="revealOnScroll">
         @if ($members->isEmpty())
-            <div class="rounded-2xl border border-dashed border-white/15 bg-accent-600 px-6 py-20 text-center">
-                <p class="font-display text-3xl tracking-wide text-white">Team profiles coming soon</p>
-                <p class="mt-2 text-gray-400">We are preparing detailed bios for every member of the Sportika staff. Check back shortly.</p>
-                <a href="{{ route('about') }}" class="mt-6 inline-block rounded-full border border-accent-300 px-6 py-3 text-sm font-bold uppercase tracking-wider text-accent-400 transition hover:bg-accent-500/10">
+            <div class="card-shadow rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-20 text-center">
+                <div class="mx-auto mb-5 grid size-16 place-items-center rounded-full bg-accent-500/10 text-accent-500">
+                    <svg class="size-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>
+                </div>
+                <p class="font-display text-3xl tracking-wide text-black">Team Profiles Coming Soon</p>
+                <p class="mt-2 text-gray-500">We are preparing detailed bios for every member of the Sportika staff. Check back shortly.</p>
+                <a href="{{ route('about') }}" class="btn-tactile mt-6 inline-block rounded-full bg-accent-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-accent-400">
                     Learn about us →
                 </a>
             </div>
         @else
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" x-reveal>
                 @foreach ($members as $member)
-                    <a href="{{ route('team.show', $member->slug) }}" class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-accent-400">
+                    <a href="{{ route('team.show', $member->slug) }}" class="card-shadow group relative overflow-hidden rounded-2xl border border-gray-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-accent-400">
                         <div class="relative aspect-[3/4] overflow-hidden">
                             <img
                                 src="{{ $member->photo_url ?? asset('images/player-fallback.svg') }}"

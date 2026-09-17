@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\ResolvesImageUrls;
 use Illuminate\Database\Eloquent\Model;
 
 class GalleryItem extends Model
 {
+    use ResolvesImageUrls;
     protected $fillable = [
         'title', 'type', 'file_path', 'album', 'tournament',
         'caption', 'sort_order', 'is_featured',
@@ -20,7 +22,7 @@ class GalleryItem extends Model
 
     public function getFileUrlAttribute(): ?string
     {
-        return $this->file_path ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->file_path) : null;
+        return $this->resolveImageUrl($this->file_path);
     }
 
     public function scopeFeatured($query)

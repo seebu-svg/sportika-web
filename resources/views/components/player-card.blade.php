@@ -15,7 +15,7 @@
     $badgeLabel = ucfirst($badge);
 @endphp
 
-<article class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:border-accent-400 hover:shadow-lg hover:shadow-accent-500/10">
+<article class="card-shadow group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition duration-300 hover:border-accent-400">
     <a href="{{ route('players.show', $player->slug) }}" class="block">
         <div class="relative aspect-[4/5] overflow-hidden bg-gray-50">
             <img

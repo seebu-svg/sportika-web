@@ -17,7 +17,7 @@
 
     <section class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8" x-data="{ open: null }">
         {{-- General --}}
-        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-white">General</h2>
+        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-black">General</h2>
         <div class="mb-12 space-y-3">
             @php $faqs = [
                 ['q' => 'What is Sportika?', 'a' => 'Sportika is a player management and sports marketing platform based in Karachi, Pakistan. We represent athletes across multiple sports, organise tournaments, and connect players with sponsors, clubs, and media opportunities.'],
@@ -25,7 +25,7 @@
                 ['q' => 'Where is Sportika based?', 'a' => 'Our office is located in Karachi, Pakistan. However, we work with athletes at every level — from local club players to international competitors — across the country.'],
             ] @endphp
             @foreach ($faqs as $i => $faq)
-                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                <div class="card-shadow rounded-xl border border-gray-200 bg-white overflow-hidden">
                     <button
                         @click="open === {{ $i }} ? open = null : open = {{ $i }}"
                         class="flex w-full items-center justify-between px-6 py-4 text-left text-black transition hover:bg-blue-50"
@@ -41,7 +41,7 @@
         </div>
 
         {{-- Player Registration --}}
-        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-white">Player Registration</h2>
+        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-black">Player Registration</h2>
         <div class="mb-12 space-y-3">
             @php $faqs = [
                 ['q' => 'How do I register as a player on Sportika?', 'a' => 'Click the "Join the Platform" button on the home page, then select "Join as Player". Fill out the registration form with your personal details, sport-specific information, achievements, and media. Once submitted, our admin team will review your application.'],
@@ -53,7 +53,7 @@
                 ['q' => 'I am a school/college-level player. Can I still register?', 'a' => 'Absolutely. We welcome players at every level — School, College, University, Domestic, National, and International. If you are a minor, the form includes an optional Parent/Guardian Contact field.'],
             ] @endphp
             @foreach ($faqs as $i => $faq)
-                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                <div class="card-shadow rounded-xl border border-gray-200 bg-white overflow-hidden">
                     <button
                         @click="open === 'p{{ $i }}' ? open = null : open = 'p{{ $i }}'"
                         class="flex w-full items-center justify-between px-6 py-4 text-left text-black transition hover:bg-blue-50"
@@ -69,7 +69,7 @@
         </div>
 
         {{-- Tournaments & Events --}}
-        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-white">Tournaments & Events</h2>
+        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-black">Tournaments & Events</h2>
         <div class="mb-12 space-y-3">
             @php $faqs = [
                 ['q' => 'How can I find upcoming tournaments?', 'a' => 'Visit the Tournaments page where you can filter by sport, city, and status (Upcoming, Ongoing, or Past) to find events relevant to you.'],
@@ -77,7 +77,7 @@
                 ['q' => 'Can my brand sponsor a tournament?', 'a' => 'Yes! Visit our Sponsors page and click "Become a Sponsor" to submit an inquiry, or reach out via the Contact page. We offer various sponsorship and partnership packages.'],
             ] @endphp
             @foreach ($faqs as $i => $faq)
-                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                <div class="card-shadow rounded-xl border border-gray-200 bg-white overflow-hidden">
                     <button
                         @click="open === 't{{ $i }}' ? open = null : open = 't{{ $i }}'"
                         class="flex w-full items-center justify-between px-6 py-4 text-left text-black transition hover:bg-blue-50"
@@ -93,7 +93,7 @@
         </div>
 
         {{-- Sponsorship & Partnerships --}}
-        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-white">Sponsorship & Partnerships</h2>
+        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-black">Sponsorship & Partnerships</h2>
         <div class="mb-12 space-y-3">
             @php $faqs = [
                 ['q' => 'How can my brand become a sponsor?', 'a' => 'Click "Join as Brand/Sponsor" from the home page, or visit the Sponsors page and click "Become a Sponsor". Fill out the form with your brand details and areas of interest (Sponsorship, Partnership, or Advertising). Our team will get back to you.'],
@@ -101,7 +101,7 @@
                 ['q' => 'Will I get visibility for my sponsorship?', 'a' => 'Absolutely. All sponsors and partners are featured on our Sponsors page with logos and descriptions. Depending on the partnership level, you may also get visibility across our social media, event banners, player profiles, and tournament coverage.'],
             ] @endphp
             @foreach ($faqs as $i => $faq)
-                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                <div class="card-shadow rounded-xl border border-gray-200 bg-white overflow-hidden">
                     <button
                         @click="open === 's{{ $i }}' ? open = null : open = 's{{ $i }}'"
                         class="flex w-full items-center justify-between px-6 py-4 text-left text-black transition hover:bg-blue-50"
@@ -117,14 +117,14 @@
         </div>
 
         {{-- Podcast --}}
-        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-white">Podcast</h2>
+        <h2 class="mb-6 font-display text-2xl uppercase tracking-wider text-black">Podcast</h2>
         <div class="mb-12 space-y-3">
             @php $faqs = [
                 ['q' => 'How can I apply to be a guest on the Sportika podcast?', 'a' => 'Visit the Podcast page and click "Apply for Podcast". Fill out the application form with your details, a pitch about why you should be featured, and your achievements. Our team reviews all applications and contacts selected guests directly.'],
                 ['q' => 'What topics are covered on the podcast?', 'a' => 'Our podcast features conversations with athletes, coaches, and sports industry professionals. Topics include career journeys, training insights, tournament experiences, mental health in sports, and the business of sports.'],
             ] @endphp
             @foreach ($faqs as $i => $faq)
-                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                <div class="card-shadow rounded-xl border border-gray-200 bg-white overflow-hidden">
                     <button
                         @click="open === 'pc{{ $i }}' ? open = null : open = 'pc{{ $i }}'"
                         class="flex w-full items-center justify-between px-6 py-4 text-left text-black transition hover:bg-blue-50"
@@ -140,8 +140,8 @@
         </div>
 
         {{-- Still have questions? --}}
-        <div class="mt-8 rounded-2xl border border-accent-200 bg-white p-8 text-center">
-            <h3 class="font-display text-2xl tracking-wider text-white">Still have questions?</h3>
+        <div class="card-shadow mt-8 rounded-2xl border border-accent-200 bg-white p-8 text-center">
+            <h3 class="font-display text-2xl tracking-wider text-black">Still have questions?</h3>
             <p class="mt-3 text-sm leading-relaxed text-gray-400">Can't find what you're looking for? Our team is happy to help.</p>
             <div class="mt-6 flex flex-wrap justify-center gap-3">
                 <a href="{{ route('contact') }}" class="rounded-full bg-accent-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-accent-400">

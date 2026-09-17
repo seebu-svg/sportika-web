@@ -22,13 +22,13 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">1. Acceptance of Terms</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">1. Acceptance of Terms</h2>
                 <p>By accessing and using the Sportika website and platform ("Service"), you accept and agree to be bound by these Terms of Service ("Terms"). If you do not agree with any part of these Terms, you must not use our website or services.</p>
                 <p class="mt-2">These Terms apply to all visitors, users, players, sponsors, and others who access or use the Service.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">2. Description of Service</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">2. Description of Service</h2>
                 <p>Sportika is a player management and sports marketing platform that provides:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     <li>Player registration, profile creation, and directory listing</li>
@@ -41,7 +41,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">3. User Accounts & Registration</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">3. User Accounts & Registration</h2>
                 <h3 class="mb-2 text-base font-semibold text-black">3.1 Player Registration</h3>
                 <p>When you register as a player, you agree to provide accurate, current, and complete information. You are responsible for maintaining the accuracy of your profile information and updating it as necessary.</p>
 
@@ -53,7 +53,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">4. Player Profiles & Content</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">4. Player Profiles & Content</h2>
                 <h3 class="mb-2 text-base font-semibold text-black">4.1 Profile Content</h3>
                 <p>By submitting content for your player profile (photos, videos, statistics, achievements, biographical information), you grant Sportika a non-exclusive, worldwide, royalty-free licence to display, distribute, and promote this content on the platform and associated marketing channels.</p>
 
@@ -65,7 +65,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">5. Intellectual Property</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">5. Intellectual Property</h2>
                 <h3 class="mb-2 text-base font-semibold text-black">5.1 Our Content</h3>
                 <p>The Sportika name, logo, branding, website design, and original content (excluding user-submitted content) are the property of Sportika and are protected by copyright, trademark, and other intellectual property laws.</p>
 
@@ -77,17 +77,17 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">6. Sponsorships & Partnerships</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">6. Sponsorships & Partnerships</h2>
                 <p>Sportika facilitates connections between players and sponsors/brands. Any sponsorship or partnership agreements entered into between parties are separate from these Terms and are the responsibility of the respective parties. Sportika is not a party to any agreement between players and sponsors and bears no liability for the performance or breach of such agreements.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">7. Tournament Participation</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">7. Tournament Participation</h2>
                 <p>Participation in Sportika-organised or affiliated tournaments is subject to the specific rules and conditions of each event. Registration for a tournament constitutes acceptance of those event-specific terms in addition to these general Terms.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">8. Prohibited Uses</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">8. Prohibited Uses</h2>
                 <p>You agree not to use the Service:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     <li>For any unlawful purpose or in violation of any applicable laws or regulations</li>
@@ -102,37 +102,37 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">9. Disclaimer of Warranties</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">9. Disclaimer of Warranties</h2>
                 <p>The Service is provided on an "as is" and "as available" basis. Sportika makes no warranties, express or implied, regarding the Service, including but not limited to the accuracy of player profiles, the availability of tournaments, or the suitability of the platform for any particular purpose.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">10. Limitation of Liability</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">10. Limitation of Liability</h2>
                 <p>To the maximum extent permitted by law, Sportika shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or goodwill, arising from your use of or inability to use the Service.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">11. Indemnification</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">11. Indemnification</h2>
                 <p>You agree to indemnify and hold harmless Sportika, its team members, partners, and affiliates from any claims, damages, losses, or expenses arising from your use of the Service, your violation of these Terms, or your violation of any third-party rights.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">12. Termination</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">12. Termination</h2>
                 <p>Sportika reserves the right to suspend or terminate your access to the Service at any time, without notice, for conduct that violates these Terms or is harmful to other users, the Service, or third parties. You may discontinue using the Service at any time.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">13. Changes to Terms</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">13. Changes to Terms</h2>
                 <p>We reserve the right to modify these Terms at any time. Changes will be effective immediately upon posting on the website. Your continued use of the Service after changes are posted constitutes acceptance of the modified Terms. We encourage you to review these Terms periodically.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">14. Governing Law</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">14. Governing Law</h2>
                 <p>These Terms shall be governed by and construed in accordance with the laws of Pakistan. Any disputes arising from these Terms or the use of the Service shall be subject to the exclusive jurisdiction of the courts of Karachi, Pakistan.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">15. Contact Us</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">15. Contact Us</h2>
                 <p>If you have questions about these Terms, please contact us:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     @if ($settings->email)<li>Email: <a href="mailto:{{ $settings->email }}" class="text-accent-500 hover:underline">{{ $settings->email }}</a></li>@endif

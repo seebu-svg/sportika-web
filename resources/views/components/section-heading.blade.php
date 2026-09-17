@@ -16,7 +16,7 @@
             {{ $eyebrow }}
         </p>
     @endif
-    <h2 class="font-display text-4xl uppercase tracking-wide {{ $inverted ? 'text-white' : 'text-black' }} sm:text-5xl">
+    <h2 class="font-display text-4xl uppercase tracking-wide heading-accent {{ $inverted ? 'text-white' : 'text-black' }} {{ $align === 'center' ? 'text-center' : '' }} sm:text-5xl">
         {{ $title }}
     </h2>
     @if ($subtitle)

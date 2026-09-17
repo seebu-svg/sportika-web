@@ -6,10 +6,12 @@
 @endphp
 
 <header
-    x-data="{ open: false, aboutOpen: false, playersOpen: false }"
-    class="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-md shadow-sm"
+    x-data="{ open: false, aboutOpen: false, playersOpen: false, scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
+    x-bind:class="{ 'header-scrolled': scrolled }"
+    class="sticky top-0 z-50 border-b border-transparent bg-white/95 backdrop-blur-md shadow-none transition-all duration-300"
 >
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 transition-all duration-300 sm:px-6 lg:px-8">
         <a href="{{ route('home') }}" class="flex items-center gap-2.5">
             <img src="{{ asset('images/wolf-logo.png') }}" alt="{{ $navSettings->site_name }}" class="size-10 rounded-lg object-contain">
             <span class="font-display text-2xl tracking-widest text-black">

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasSlug;
+use App\Models\Concerns\ResolvesImageUrls;
 use Illuminate\Database\Eloquent\Model;
 
 class Sponsor extends Model
 {
-    use HasSlug;
+    use HasSlug, ResolvesImageUrls;
 
     protected static string $slugSource = 'name';
 
@@ -25,7 +26,7 @@ class Sponsor extends Model
 
     public function getLogoUrlAttribute(): ?string
     {
-        return $this->logo ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->logo) : null;
+        return $this->resolveImageUrl($this->logo);
     }
 
     public function scopeActive($query)

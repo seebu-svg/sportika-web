@@ -12,16 +12,34 @@ A modern web application for a player management agency, built with **Laravel 12
 ### Public Website
 - **Home Page** — Hero section, featured players, latest news
 - **About Page** — Editable content managed from admin panel
+- **Team Page** — Team members with photos, bios, social links
 - **Players Directory** — Filterable listing by position, nationality, search
 - **Player Portfolio** — Individual player pages with photo, stats, bio, social links
-- **News & Blog** — Rich-text articles with categories, cover images, reading time
+- **Tournaments** — Tournament listing with fixtures, results, galleries
+- **Champions Gallery** — Photo/video gallery with albums
+- **Sponsors & Partners** — Tiered sponsor showcase (title, gold, silver, bronze, partner)
+- **News** — Official updates, results, announcements
+- **Blog** — Insights, interviews, opinion pieces with categories
+- **Podcast** — Episode listing with streaming links (YouTube, Spotify, Apple)
+- **Membership** — Player registration and brand partnership applications
 - **Contact Form** — Honeypot spam protection, email notifications to admin
+- **FAQ Page** — Frequently asked questions
+- **Legal Pages** — Privacy policy and terms of service
 
 ### Admin Panel (Filament)
 - **Dashboard** — Stats overview (players, posts, unread messages)
 - **Players CRUD** — Full management with photo upload, career stats, honours, social links
-- **Posts CRUD** — Rich-text editor, categories, scheduling, featured flag, SEO fields
-- **Categories** — Blog category management with post counts
+- **News Posts CRUD** — Rich-text editor, categories, scheduling, featured flag, SEO fields
+- **Blog Posts CRUD** — Separate blog section with tags, authors, cover images
+- **Categories** — Blog/news category management with post counts
+- **Tournaments CRUD** — Fixtures, results, galleries, status tracking
+- **Gallery Items** — Photo/video upload with albums, featured items
+- **Sponsors CRUD** — Tiered sponsorship management with logos
+- **Team Members CRUD** — Staff profiles with photos, bios, social links
+- **Podcast Episodes** — Episode management with streaming platform links
+- **Player Applications** — Approval workflow with auto-player creation
+- **Brand Applications** — Partnership/sponsorship inquiry management
+- **Podcast Applications** — Guest application review and shortlisting
 - **Messages Inbox** — View/read/reply to contact form submissions
 - **Site Settings** — Editable homepage content, about page, contact details, social URLs
 
@@ -132,11 +150,26 @@ sportika-web/
 |-------|------------|-------------|
 | `/` | `HomeController` | Homepage with hero, featured players, latest posts |
 | `/about` | `AboutController` | About page with editable content |
+| `/team` | `TeamController@index` | Team members listing |
+| `/team/{slug}` | `TeamController@show` | Individual team member profile |
 | `/players` | `PlayerController@index` | Filterable player directory |
 | `/players/{slug}` | `PlayerController@show` | Individual player portfolio |
-| `/news` | `PostController@index` | Blog listing with category filters |
-| `/news/{slug}` | `PostController@show` | Single blog post |
+| `/tournaments` | `TournamentController@index` | Tournament listing |
+| `/tournaments/{slug}` | `TournamentController@show` | Tournament detail with fixtures/results |
+| `/gallery` | `GalleryController` | Champions gallery with photos/videos |
+| `/sponsors` | `SponsorController` | Sponsors and partners showcase |
+| `/news` | `PostController@index` | News listing (official updates) |
+| `/news/{slug}` | `PostController@show` | Single news post |
+| `/blogs` | `BlogController@index` | Blog listing (insights, interviews) |
+| `/blogs/{slug}` | `BlogController@show` | Single blog post |
+| `/podcast` | `PodcastController` | Podcast episodes listing |
+| `/podcast/apply` | `PodcastApplyController` | Podcast guest application form |
+| `/join/player` | `MembershipController` | Player registration application |
+| `/join/brand` | `MembershipController` | Brand partnership application |
 | `/contact` | `ContactController` | Contact form with honeypot |
+| `/faq` | `FaqController` | Frequently asked questions |
+| `/privacy-policy` | `LegalController` | Privacy policy page |
+| `/terms-of-service` | `LegalController` | Terms of service page |
 
 ## Hostinger Deployment
 

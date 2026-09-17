@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasSlug;
+use App\Models\Concerns\ResolvesImageUrls;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tournament extends Model
 {
-    use HasSlug, SoftDeletes;
+    use HasSlug, SoftDeletes, ResolvesImageUrls;
 
     protected static string $slugSource = 'name';
 
@@ -34,7 +35,7 @@ class Tournament extends Model
 
     public function getCoverUrlAttribute(): ?string
     {
-        return $this->cover_image ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_image) : null;
+        return $this->resolveImageUrl($this->cover_image);
     }
 
     public function scopeUpcoming($query)

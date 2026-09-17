@@ -22,13 +22,13 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">1. Introduction</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">1. Introduction</h2>
                 <p>Welcome to Sportika ("we", "our", or "us"). This Privacy Policy explains how we collect, use, disclose, and safeguard your personal data when you visit our website, interact with our services, or engage with our platform. We are committed to protecting your privacy and ensuring your personal information is handled responsibly.</p>
                 <p class="mt-2">By using our website and services, you agree to the collection and use of information in accordance with this policy.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">2. Information We Collect</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">2. Information We Collect</h2>
                 <h3 class="mb-2 text-base font-semibold text-black">2.1 Personal Information</h3>
                 <p>We may collect the following personal data:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
@@ -52,7 +52,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">3. How We Use Your Information</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">3. How We Use Your Information</h2>
                 <p>We use the collected data for the following purposes:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     <li>To create and manage player profiles and directory listings</li>
@@ -70,7 +70,7 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">4. Data Sharing & Disclosure</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">4. Data Sharing & Disclosure</h2>
                 <p>We may share your personal data in the following circumstances:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     <li><strong class="text-black">Player Profiles:</strong> Approved player information is displayed publicly on the Sportika platform. Sensitive data (CNIC, phone number) is never shown publicly.</li>
@@ -82,12 +82,12 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">5. Data Retention</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">5. Data Retention</h2>
                 <p>We retain your personal data for as long as your player profile is active or as needed to fulfil the purposes outlined in this policy. If you request deletion of your account, we will remove your data within 30 days, except where we are required to retain it for legal or regulatory purposes.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">6. Your Rights</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">6. Your Rights</h2>
                 <p>You have the following rights regarding your personal data:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     <li><strong class="text-black">Access:</strong> Request a copy of the personal data we hold about you.</li>
@@ -101,27 +101,27 @@
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">7. Data Security</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">7. Data Security</h2>
                 <p>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">8. Cookies</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">8. Cookies</h2>
                 <p>Our website may use cookies or similar technologies to enhance user experience and collect usage data. You can control cookie settings through your browser preferences.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">9. Children's Privacy</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">9. Children's Privacy</h2>
                 <p>Our platform is open to players of all ages, including school-level athletes who may be minors. For users under 18, we recommend that a parent or guardian reviews this privacy policy and provides consent before submitting personal data through our registration forms. We include an optional Parent/Guardian Contact field for school and college-level players.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">10. Changes to This Policy</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">10. Changes to This Policy</h2>
                 <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of significant changes by posting a notice on our website or sending an email. Your continued use of our services after changes are posted constitutes acceptance of the updated policy.</p>
             </div>
 
             <div>
-                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-white">11. Contact Us</h2>
+                <h2 class="mb-3 font-display text-xl uppercase tracking-wider text-black">11. Contact Us</h2>
                 <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
                 <ul class="mt-2 list-inside list-disc space-y-1">
                     @if ($settings->email)<li>Email: <a href="mailto:{{ $settings->email }}" class="text-accent-500 hover:underline">{{ $settings->email }}</a></li>@endif
