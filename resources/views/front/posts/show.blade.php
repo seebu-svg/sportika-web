@@ -59,8 +59,45 @@
                 {!! $post->content !!}
             </div>
 
-            {{-- Share / back --}}
-            <div class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8">
+            {{-- Tags --}}
+            @if ($post->category)
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Tags:</span>
+                    <a href="{{ route('posts.index', ['category' => $post->category->slug]) }}" class="rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-accent-400/15 hover:text-accent-300">
+                        {{ $post->category->name }}
+                    </a>
+                </div>
+            @endif
+
+            {{-- Share buttons --}}
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Share:</span>
+                <button
+                    onclick="navigator.clipboard.writeText('{{ route('posts.show', $post->slug) }}').then(function(){ alert('Link copied!') })"
+                    class="rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300"
+                >
+                    Copy Link
+                </button>
+                <a
+                    href="https://wa.me/?text={{ urlencode($post->title . ' ' . route('posts.show', $post->slug)) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-slate-300 transition hover:border-green-500/50 hover:text-green-400"
+                >
+                    WhatsApp
+                </a>
+                <a
+                    href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ urlencode(route('posts.show', $post->slug)) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-slate-300 transition hover:border-sky-500/50 hover:text-sky-400"
+                >
+                    X (Twitter)
+                </a>
+            </div>
+
+            {{-- Back --}}
+            <div class="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8">
                 <a
                     href="{{ route('posts.index') }}"
                     class="rounded-full border border-white/20 px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition hover:border-accent-400/60 hover:text-accent-300"

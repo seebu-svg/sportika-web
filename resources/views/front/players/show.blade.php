@@ -1,13 +1,30 @@
 @extends('layouts.public')
 
-@section('title', $player->name.' — Player Portfolio')
+@section('title', $player->name.' — Player Profile')
 @section('meta_description', Str::limit(strip_tags($player->short_description ?? $player->bio), 160))
 
+@php
+    $badge = $player->status_badge ?? 'unverified';
+    $badgeColors = match($badge) {
+        'verified' => 'bg-accent-400 text-pitch-950',
+        'featured' => 'bg-amber-400 text-pitch-950',
+        default => 'bg-slate-600 text-slate-300',
+    };
+@endphp
+
 @section('content')
-    {{-- ============================== Hero =============================== --}}
+    {{-- ============================== HERO =============================== --}}
     <section class="relative overflow-hidden bg-pitch-900">
-        <div class="bg-diagonal absolute inset-0"></div>
-        <div class="absolute -top-40 right-0 size-[32rem] rounded-full bg-accent-400/10 blur-3xl"></div>
+        {{-- Cover image --}}
+        @if ($player->cover_image_url)
+            <div class="absolute inset-0">
+                <img src="{{ $player->cover_image_url }}" alt="" class="size-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-pitch-950/60 via-pitch-950/80 to-pitch-900"></div>
+            </div>
+        @else
+            <div class="bg-diagonal absolute inset-0"></div>
+            <div class="absolute -top-40 right-0 size-[32rem] rounded-full bg-accent-400/10 blur-3xl"></div>
+        @endif
 
         <div class="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
             <nav class="mb-6 text-sm text-slate-400">
@@ -37,10 +54,23 @@
                 </div>
 
                 <div class="lg:col-span-3">
-                    <p class="mb-3 inline-flex items-center gap-2 rounded-full bg-accent-400 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-pitch-950">
-                        {{ $player->position }}
-                    </p>
-                    <h1 class="font-display text-5xl uppercase tracking-wide text-white sm:text-7xl">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="inline-flex rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] {{ $badgeColors }}">
+                            {{ ucfirst($badge) }}
+                        </span>
+                        @if ($player->sport)
+                            <span class="inline-flex rounded-full border border-white/20 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+                                {{ $player->sport }}
+                            </span>
+                        @endif
+                        @if ($player->level)
+                            <span class="inline-flex rounded-full border border-white/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                                {{ $player->level }}
+                            </span>
+                        @endif
+                    </div>
+
+                    <h1 class="mt-4 font-display text-5xl uppercase tracking-wide text-white sm:text-7xl">
                         {{ $player->name }}
                     </h1>
 
@@ -48,7 +78,9 @@
                         @if ($player->current_club)
                             <span><strong class="text-white">Club:</strong> {{ $player->current_club }}</span>
                         @endif
-                        @if ($player->nationality)
+                        @if ($player->city)
+                            <span><strong class="text-white">City:</strong> {{ $player->city }}</span>
+                        @elseif ($player->nationality)
                             <span><strong class="text-white">Nationality:</strong> {{ $player->nationality }}</span>
                         @endif
                         @if ($player->age)
@@ -63,17 +95,11 @@
                     @endif
 
                     <div class="mt-8 flex flex-wrap gap-3">
-                        <a
-                            href="{{ route('contact') }}"
-                            class="rounded-full bg-accent-400 px-6 py-3 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-accent-300"
-                        >
-                            Enquire about {{ Str::before($player->name, ' ') }}
+                        <a href="{{ route('contact') }}" class="rounded-full bg-accent-400 px-6 py-3 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-accent-300">
+                            Inquire about {{ Str::before($player->name, ' ') }}
                         </a>
-                        <a
-                            href="{{ route('players.index') }}"
-                            class="rounded-full border border-white/20 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:border-accent-400/60 hover:text-accent-300"
-                        >
-                            Back to directory
+                        <a href="{{ route('membership.player') }}" class="rounded-full border border-white/20 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:border-accent-400/60 hover:text-accent-300">
+                            Make Your Profile
                         </a>
                     </div>
                 </div>
@@ -81,7 +107,7 @@
         </div>
     </section>
 
-    {{-- ============================ Vitals & stats ======================= --}}
+    {{-- ============================ VITALS & STATS ======================= --}}
     <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             @php
@@ -108,7 +134,7 @@
         </div>
     </section>
 
-    {{-- ================================ Bio ============================== --}}
+    {{-- ================================ BIO ============================== --}}
     @if (filled($player->bio))
         <section class="border-y border-white/10 bg-pitch-900">
             <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
@@ -120,39 +146,110 @@
         </section>
     @endif
 
-    {{-- ============================== Honours ============================ --}}
-    @if (! empty($player->honours))
+    {{-- ============================ ACHIEVEMENTS ========================= --}}
+    @if (! empty($player->achievements) || ! empty($player->honours))
         <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <x-section-heading eyebrow="Trophies" title="Honours & awards" />
+            <x-section-heading eyebrow="Trophies & milestones" title="Achievements" />
             <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach ($player->honours as $award => $season)
-                    <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-pitch-800 p-5">
-                        <span class="grid size-10 shrink-0 place-items-center rounded-full bg-accent-400/15 text-accent-400">
-                            <svg class="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 9.2 8.6 2 9.3l5.5 4.8L5.8 22 12 18.3 18.2 22l-1.7-7.9L22 9.3l-7.2-.7z"/></svg>
-                        </span>
-                        <div>
-                            <p class="font-semibold text-white">{{ $award }}</p>
-                            <p class="text-sm text-slate-400">{{ $season }}</p>
-                        </div>
-                    </li>
-                @endforeach
+                @if (! empty($player->achievements))
+                    @foreach ($player->achievements as $achievement)
+                        <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-pitch-800 p-5">
+                            <span class="grid size-10 shrink-0 place-items-center rounded-full bg-accent-400/15 text-accent-400">
+                                <svg class="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 9.2 8.6 2 9.3l5.5 4.8L5.8 22 12 18.3 18.2 22l-1.7-7.9L22 9.3l-7.2-.7z"/></svg>
+                            </span>
+                            <div>
+                                <p class="font-semibold text-white">{{ $achievement['title'] ?? 'Achievement' }}</p>
+                                @if (! empty($achievement['year']))
+                                    <p class="text-xs text-accent-400">{{ $achievement['year'] }}</p>
+                                @endif
+                                @if (! empty($achievement['description']))
+                                    <p class="mt-1 text-sm text-slate-400">{{ $achievement['description'] }}</p>
+                                @endif
+                            </div>
+                        </li>
+                    @endforeach
+                @endif
+                @if (! empty($player->honours))
+                    @foreach ($player->honours as $award => $season)
+                        <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-pitch-800 p-5">
+                            <span class="grid size-10 shrink-0 place-items-center rounded-full bg-accent-400/15 text-accent-400">
+                                <svg class="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 9.2 8.6 2 9.3l5.5 4.8L5.8 22 12 18.3 18.2 22l-1.7-7.9L22 9.3l-7.2-.7z"/></svg>
+                            </span>
+                            <div>
+                                <p class="font-semibold text-white">{{ $award }}</p>
+                                <p class="text-sm text-slate-400">{{ $season }}</p>
+                            </div>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </section>
     @endif
 
-    {{-- ============================== Socials ============================ --}}
+    {{-- ============================ MEDIA & NEWS ========================= --}}
+    @if (! empty($player->media) || ! empty($player->press_mentions))
+        <section class="border-y border-white/10 bg-pitch-900/50">
+            <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+                <x-section-heading eyebrow="In the spotlight" title="Media & News" />
+
+                @if (! empty($player->media))
+                    <div class="mb-8">
+                        <h4 class="mb-4 text-sm font-bold uppercase tracking-wider text-slate-400">Photos & Videos</h4>
+                        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            @foreach ($player->media as $item)
+                                @if (str_contains($item['url'] ?? '', 'youtube') || str_contains($item['url'] ?? '', 'instagram'))
+                                    <a href="{{ $item['url'] ?? '#' }}" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-pitch-800">
+                                        <div class="bg-diagonal absolute inset-0"></div>
+                                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                            <div class="grid size-12 place-items-center rounded-full bg-accent-400/20 text-accent-400 transition group-hover:scale-110">
+                                                <svg class="size-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                                            </div>
+                                            <p class="mt-3 text-xs text-slate-400">{{ $item['type'] ?? 'Video' }}</p>
+                                        </div>
+                                    </a>
+                                @else
+                                    <div class="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-pitch-800">
+                                        <img src="{{ $item['url'] ?? '' }}" alt="{{ $item['caption'] ?? '' }}" class="size-full object-cover">
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                @if (! empty($player->press_mentions))
+                    <div>
+                        <h4 class="mb-4 text-sm font-bold uppercase tracking-wider text-slate-400">Press & Mentions</h4>
+                        <div class="space-y-3">
+                            @foreach ($player->press_mentions as $mention)
+                                <a href="{{ $mention['link'] ?? '#' }}" target="_blank" rel="noopener" class="flex items-center gap-4 rounded-2xl border border-white/10 bg-pitch-800 p-4 transition hover:border-accent-400/40">
+                                    <span class="grid size-10 shrink-0 place-items-center rounded-full bg-accent-400/15 text-accent-400">
+                                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" /></svg>
+                                    </span>
+                                    <div>
+                                        <p class="text-sm font-medium text-white">{{ $mention['publication'] ?? 'Press mention' }}</p>
+                                        @if (! empty($mention['date']))
+                                            <p class="text-xs text-slate-500">{{ $mention['date'] }}</p>
+                                        @endif
+                                    </div>
+                                    <span class="ml-auto text-xs font-bold text-accent-400">Read →</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </section>
+    @endif
+
+    {{-- ============================= SOCIALS ============================= --}}
     @if (! empty($player->social_links))
-        <section class="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
+        <section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
             <div class="rounded-2xl border border-white/10 bg-pitch-800 p-6">
                 <h3 class="font-display text-xl tracking-wider text-white">Follow {{ $player->name }}</h3>
                 <div class="mt-4 flex flex-wrap gap-2">
                     @foreach ($player->social_links as $platform => $url)
-                        <a
-                            href="{{ $url }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300"
-                        >
+                        <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300">
                             {{ $platform }}
                         </a>
                     @endforeach
@@ -161,7 +258,32 @@
         </section>
     @endif
 
-    {{-- =========================== Related players ======================= --}}
+    {{-- ========================== SHARE & CTA ============================ --}}
+    <section class="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-accent-400/20 bg-pitch-800 p-6">
+            <div class="flex flex-wrap items-center justify-between gap-6">
+                <div>
+                    <h3 class="font-display text-xl tracking-wider text-white">Share this profile</h3>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <a href="https://wa.me/?text={{ urlencode($player->name.' — Player Profile '.route('players.show', $player->slug)) }}" target="_blank" rel="noopener" class="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-green-500/50 hover:text-green-400">
+                            WhatsApp
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-pink-500/50 hover:text-pink-400">
+                            Instagram Story
+                        </a>
+                        <button onclick="navigator.clipboard.writeText('{{ route('players.show', $player->slug) }}'); this.textContent='Copied!';" class="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300">
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+                <a href="{{ route('membership.player') }}" class="rounded-full bg-accent-400 px-6 py-3 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-accent-300">
+                    Make Your Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- =========================== RELATED =============================== --}}
     @if ($relatedPlayers->isNotEmpty())
         <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
             <x-section-heading eyebrow="More players" title="Similar talent" align="center" />

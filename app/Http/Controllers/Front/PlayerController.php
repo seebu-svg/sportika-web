@@ -11,38 +11,45 @@ class PlayerController extends Controller
 {
     public function index(Request $request): View
     {
-        $players = Player::published()
-            ->when(
-                $request->filled('position'),
-                fn ($query) => $query->where('position', $request->string('position'))
-            )
-            ->when(
-                $request->filled('nationality'),
-                fn ($query) => $query->where('nationality', $request->string('nationality'))
-            )
+        $sort = $request->input('sort', 'featured');
+
+        $query = Player::published()
             ->when(
                 $request->filled('search'),
-                fn ($query) => $query->where(function ($query) use ($request) {
-                    $term = '%'.$request->string('search').'%';
-
-                    $query->where('name', 'like', $term)
-                        ->orWhere('current_club', 'like', $term);
+                fn ($q) => $q->where(function ($q) use ($request) {
+                    $term = '%' . $request->string('search') . '%';
+                    $q->where('name', 'like', $term)
+                        ->orWhere('current_club', 'like', $term)
+                        ->orWhere('sport', 'like', $term);
                 })
             )
-            ->orderBy('is_featured', 'desc')
-            ->orderBy('name')
-            ->paginate(12)
-            ->withQueryString();
+            ->when(
+                $request->filled('city'),
+                fn ($q) => $q->where('city', $request->string('city'))
+            )
+            ->when(
+                $request->filled('level'),
+                fn ($q) => $q->where('level', $request->string('level'))
+            )
+            ->when(
+                $request->filled('sport'),
+                fn ($q) => $q->where('sport', $request->string('sport'))
+            );
+
+        match ($sort) {
+            'newest' => $query->latest('created_at'),
+            'alpha' => $query->orderBy('name'),
+            'featured' => $query->orderBy('is_featured', 'desc')->orderBy('name'),
+            default => $query->latest('created_at'),
+        };
+
+        $players = $query->paginate(20)->withQueryString();
 
         return view('front.players.index', [
             'players' => $players,
-            'positions' => Player::POSITIONS,
-            'nationalities' => Player::published()
-                ->distinct()
-                ->orderBy('nationality')
-                ->pluck('nationality')
-                ->filter()
-                ->values(),
+            'cities' => Player::published()->distinct()->orderBy('city')->pluck('city')->filter()->values(),
+            'levels' => Player::LEVELS,
+            'sports' => Player::SPORTS,
         ]);
     }
 
@@ -52,7 +59,11 @@ class PlayerController extends Controller
 
         $related = Player::published()
             ->whereKeyNot($player->getKey())
-            ->where('position', $player->position)
+            ->when(
+                $player->sport,
+                fn ($q) => $q->where('sport', $player->sport),
+                fn ($q) => $q->where('position', $player->position)
+            )
             ->inRandomOrder()
             ->take(3)
             ->get();

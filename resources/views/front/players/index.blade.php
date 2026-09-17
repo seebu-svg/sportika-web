@@ -9,47 +9,40 @@
             <x-section-heading
                 eyebrow="The squad"
                 title="Players Directory"
-                subtitle="Browse our represented athletes and open their full portfolio."
+                subtitle="Browse our represented athletes — search, filter and discover talent."
             />
 
             {{-- Filters --}}
-            <form method="GET" action="{{ route('players.index') }}" class="grid gap-3 rounded-2xl border border-white/10 bg-pitch-800 p-4 sm:grid-cols-2 lg:grid-cols-4">
+            <form method="GET" action="{{ route('players.index') }}" class="grid gap-3 rounded-2xl border border-white/10 bg-pitch-800 p-4 sm:grid-cols-2 lg:grid-cols-5">
                 <input
                     type="text"
                     name="search"
                     value="{{ request('search') }}"
-                    placeholder="Search name or club…"
+                    placeholder="Search name, sport, club…"
                     class="rounded-lg border border-white/10 bg-pitch-900 px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none focus:border-accent-400/60"
                 >
-                <select
-                    name="position"
-                    class="rounded-lg border border-white/10 bg-pitch-900 px-4 py-2.5 text-sm text-white outline-none focus:border-accent-400/60"
-                >
-                    <option value="">All positions</option>
-                    @foreach ($positions as $position)
-                        <option value="{{ $position }}" @selected(request('position') === $position)>{{ $position }}</option>
+                <select name="city" class="rounded-lg border border-white/10 bg-pitch-900 px-4 py-2.5 text-sm text-white outline-none focus:border-accent-400/60">
+                    <option value="">All cities</option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city }}" @selected(request('city') === $city)>{{ $city }}</option>
                     @endforeach
                 </select>
-                <select
-                    name="nationality"
-                    class="rounded-lg border border-white/10 bg-pitch-900 px-4 py-2.5 text-sm text-white outline-none focus:border-accent-400/60"
-                >
-                    <option value="">All nationalities</option>
-                    @foreach ($nationalities as $nationality)
-                        <option value="{{ $nationality }}" @selected(request('nationality') === $nationality)>{{ $nationality }}</option>
+                <select name="level" class="rounded-lg border border-white/10 bg-pitch-900 px-4 py-2.5 text-sm text-white outline-none focus:border-accent-400/60">
+                    <option value="">All levels</option>
+                    @foreach ($levels as $level)
+                        <option value="{{ $level }}" @selected(request('level') === $level)>{{ $level }}</option>
                     @endforeach
+                </select>
+                <select name="sort" class="rounded-lg border border-white/10 bg-pitch-900 px-4 py-2.5 text-sm text-white outline-none focus:border-accent-400/60">
+                    <option value="featured" @selected(request('sort', 'featured') === 'featured')>Featured First</option>
+                    <option value="newest" @selected(request('sort') === 'newest')>Newest</option>
+                    <option value="alpha" @selected(request('sort') === 'alpha')>Alphabetical (A–Z)</option>
                 </select>
                 <div class="flex gap-2">
-                    <button
-                        type="submit"
-                        class="flex-1 rounded-lg bg-accent-400 px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-accent-300"
-                    >
+                    <button type="submit" class="flex-1 rounded-lg bg-accent-400 px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-pitch-950 transition hover:bg-accent-300">
                         Filter
                     </button>
-                    <a
-                        href="{{ route('players.index') }}"
-                        class="rounded-lg border border-white/10 px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300"
-                    >
+                    <a href="{{ route('players.index') }}" class="rounded-lg border border-white/10 px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-slate-300 transition hover:border-accent-400/50 hover:text-accent-300">
                         Reset
                     </a>
                 </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\LegalController;
 use App\Http\Controllers\Front\MembershipController;
 use App\Http\Controllers\Front\PlayerController;
+use App\Http\Controllers\Front\PodcastApplyController;
 use App\Http\Controllers\Front\PodcastController;
 use App\Http\Controllers\Front\PostController;
 use App\Http\Controllers\Front\SponsorController;
@@ -28,6 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // About & Team
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/team', [TeamController::class, 'index'])->name('team');
+Route::get('/team/{slug}', [TeamController::class, 'show'])->name('team.show');
 
 // Players
 Route::get('/players', [PlayerController::class, 'index'])->name('players.index');
@@ -45,11 +47,14 @@ Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors');
 
 // Membership / Registration
 Route::get('/join/player', [MembershipController::class, 'joinPlayer'])->name('membership.player');
+Route::post('/join/player', [MembershipController::class, 'storePlayer'])->name('membership.player.store');
 Route::get('/join/brand', [MembershipController::class, 'joinBrand'])->name('membership.brand');
+Route::post('/join/brand', [MembershipController::class, 'storeBrand'])->name('membership.brand.store');
 
 // Podcast
 Route::get('/podcast', [PodcastController::class, 'index'])->name('podcast');
-Route::get('/podcast/apply', [PodcastController::class, 'apply'])->name('podcast.apply');
+Route::get('/podcast/apply', [PodcastApplyController::class, 'create'])->name('podcast.apply');
+Route::post('/podcast/apply', [PodcastApplyController::class, 'store'])->name('podcast.apply.store');
 
 // News (official updates, results, announcements)
 Route::get('/news', [PostController::class, 'index'])->name('posts.index');

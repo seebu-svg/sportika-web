@@ -20,18 +20,33 @@ class Player extends Model
 
     public const STATUSES = ['draft', 'published'];
 
+    public const STATUS_BADGES = ['unverified', 'verified', 'featured'];
+
+    public const LEVELS = ['International', 'National', 'Domestic', 'University', 'College', 'School'];
+
+    public const SPORTS = [
+        'Cricket', 'Football', 'Futsal', 'Badminton',
+        'Chess', 'Padel', 'MMA', 'Boxing', 'Kabaddi',
+        'Volleyball', 'Basketball', 'Tennis', 'Table Tennis',
+        'Swimming', 'Athletics', 'Other',
+    ];
+
     protected $fillable = [
         'name',
         'slug',
         'position',
+        'sport',
         'jersey_number',
         'nationality',
+        'city',
+        'level',
         'date_of_birth',
         'height_cm',
         'weight_kg',
         'preferred_foot',
         'current_club',
         'photo',
+        'cover_image',
         'short_description',
         'bio',
         'appearances',
@@ -39,8 +54,12 @@ class Player extends Model
         'assists',
         'clean_sheets',
         'honours',
+        'achievements',
+        'media',
+        'press_mentions',
         'social_links',
         'status',
+        'status_badge',
         'is_featured',
     ];
 
@@ -49,6 +68,9 @@ class Player extends Model
         return [
             'date_of_birth' => 'date:Y-m-d',
             'honours' => 'array',
+            'achievements' => 'array',
+            'media' => 'array',
+            'press_mentions' => 'array',
             'social_links' => 'array',
             'is_featured' => 'boolean',
             'jersey_number' => 'integer',
@@ -71,9 +93,19 @@ class Player extends Model
         return $query->published()->where('is_featured', true);
     }
 
+    public function scopeVerified($query)
+    {
+        return $query->published()->where('status_badge', 'verified');
+    }
+
     public function getPhotoUrlAttribute(): ?string
     {
         return $this->photo ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->photo) : null;
+    }
+
+    public function getCoverImageUrlAttribute(): ?string
+    {
+        return $this->cover_image ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_image) : null;
     }
 
     public function getAgeAttribute(): ?int

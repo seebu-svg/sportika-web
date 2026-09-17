@@ -12,14 +12,28 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        $settings = SiteSetting::current();
+
         return view('front.home', [
-            'settings' => SiteSetting::current(),
+            'settings' => $settings,
             'featuredPlayers' => Player::featured()->latest('updated_at')->take(4)->get(),
-            'latestPosts' => Post::published()
+            'latestNews' => Post::published()
                 ->with('category')
                 ->latest('published_at')
                 ->take(3)
                 ->get(),
+            'latestBlogs' => Post::published()
+                ->with('category')
+                ->latest('published_at')
+                ->skip(3)
+                ->take(3)
+                ->get(),
+            'stats' => [
+                'players' => Player::published()->count(),
+                'countries' => Player::published()->distinct('nationality')->count('nationality'),
+                'tournaments' => 24,
+                'years' => 15,
+            ],
         ]);
     }
 }

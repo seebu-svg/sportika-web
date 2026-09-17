@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
+use App\Models\Sponsor;
 use Illuminate\View\View;
 
 class SponsorController extends Controller
@@ -12,6 +13,7 @@ class SponsorController extends Controller
     {
         return view('front.sponsors', [
             'settings' => SiteSetting::current(),
+            'sponsors' => Sponsor::active()->get(),
         ]);
     }
 }
